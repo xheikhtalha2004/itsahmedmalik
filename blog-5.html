@@ -4,18 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Certifications | Ahmed Malik</title>
-  <meta name="description"
-    content="Professional certifications, licenses, and achievements acquired by Ahmed Malik throughout his career." />
+  <title>Creating HIPAA-Compliant Healthcare Solutions | Ahmed Malik</title>
+  <meta name="description" content="Read about Creating HIPAA-Compliant Healthcare Solutions by Ahmed Malik, an expert in AI, software development, and start-up strategy." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-
   <!-- Navigation -->
   <header id="header">
     <nav class="nav-container">
@@ -41,7 +38,6 @@
       </button>
     </nav>
     <div class="nav-border"></div>
-    <!-- Mobile menu -->
     <div class="nav-mobile-menu" id="nav-mobile-menu">
       <a href="index.html#hero" class="nav-mobile-link" id="mobile-link">Home</a>
       <a href="index.html#about" class="nav-mobile-link" id="mobile-link">About</a>
@@ -53,33 +49,27 @@
   </header>
 
   <main>
-    <section class="cert-hero">
-      <h1 class="cert-hero-title">Certifications &amp; Achievements</h1>
-      <p class="cert-hero-subtitle">Professional qualifications, licenses, and specialized training verifying my expertise in technology, management, and innovation.</p>
-    </section>
-
-    <section class="certifications-section">
-      <!-- Full-page embedded PDFs -->
-      <div class="pdf-showcase">
-        <div class="cert-pdf-card">
-          <div class="cert-pdf-header">
-            <h3 class="cert-name">Digital Skills Training Program</h3>
-            <p class="cert-id">ID: 854P589MK <a href="DSTP_Certificate_ 854P589MK.pdf" target="_blank" style="color: var(--accent-blue-solid); text-decoration: none; margin-left: 10px;">(Open in new tab ↗)</a></p>
-          </div>
-          <iframe src="DSTP_Certificate_ 854P589MK.pdf#view=FitH&toolbar=0" class="pdf-iframe" title="Certificate 854P589MK"></iframe>
-        </div>
-
-        <div class="cert-pdf-card">
-          <div class="cert-pdf-header">
-            <h3 class="cert-name">Digital Skills Training Program</h3>
-            <p class="cert-id">ID: A3JC4SMMK <a href="DSTP_Certificate_ A3JC4SMMK.pdf" target="_blank" style="color: var(--accent-blue-solid); text-decoration: none; margin-left: 10px;">(Open in new tab ↗)</a></p>
-          </div>
-          <iframe src="DSTP_Certificate_ A3JC4SMMK.pdf#view=FitH&toolbar=0" class="pdf-iframe" title="Certificate A3JC4SMMK"></iframe>
-        </div>
+    <article class="blog-article">
+      <div class="blog-article-hero">
+        <span class="blog-article-meta">February 11, 2026 — Written by Ahmed Malik</span>
+        <h1 class="blog-article-title">Creating HIPAA-Compliant Healthcare Solutions</h1>
       </div>
-
-      <!-- Removed other placeholders per user request -->
-    </section>
+      <div class="blog-article-image-container">
+        <img src="images/blog_post_5.png" alt="Creating HIPAA-Compliant Healthcare Solutions" class="blog-article-image" />
+      </div>
+      <div class="blog-article-content">
+        
+        <p>Developing software for the healthcare industry presents unique architectural challenges not found in standard enterprise applications. Patient privacy is absolutely paramount, heavily guarded by stringent regulations like HIPAA in the US and GDPR in Europe. Building a modern health-tech startup means architecting your infrastructure from day one to guarantee complete data security, rigorous audit trails, and strict role-based access control measures flawlessly.</p>
+        <h2>Data Encryption at Rest and in Transit</h2>
+        <p>A fundamental requirement of HIPAA compliance is the absolute protection of Protected Health Information (PHI). Every byte of PHI must be heavily encrypted both when traversing networks (in transit) using TLS 1.3 protocols, and when stored in databases securely (at rest) utilizing robust AES-256 encryption. Developers must meticulously manage key management services (KMS), ensuring that database decryption keys are routinely rotated actively.</p>
+        <p>However, securing data technically isn't enough; the system must constantly prove it is secure. Implementing exhaustive audit logging is essential. Every time a healthcare provider opens a patient record, modifies a dosage, or queries a laboratory result, the system must rigidly log the exact timestamp, the user ID, the specific IP address, and the precise action taken immutably over time.</p>
+        <blockquote>"Compliance isn't simply a checkbox generated at launch; it is an ongoing, evolving architectural mindset that prioritizes patient security above all other development velocities."</blockquote>
+        <h3>Handling Third-Party LLMs</h3>
+        <p>The recent boom in Generative AI introduces significant compliance friction. Medical startups want to utilize LLMs to summarize patient histories or draft clinical notes quickly. But sending raw PHI to public, multi-tenant OpenAI APIs is a catastrophic, illegal violation natively. Providers must establish secure Business Associate Agreements (BAAs) with specific cloud providers running isolated AI endpoints.</p>
+        <p>Alternatively, many teams are pivoting correctly to deploying robust open-weight models (like Llama-3 or MedAlpaca) internally on their own heavily secured HIPAA-compliant private servers aggressively. By completely air-gapping the AI processing entirely within their secure virtual private cloud (VPC), health-tech developers can leverage cutting-edge intelligence securely without ever compromising sensitive patient health data at any point.</p>
+        
+      </div>
+    </article>
   </main>
 
     <!-- Footer -->
@@ -121,5 +111,4 @@
 
   <script src="script.js"></script>
 </body>
-
 </html>

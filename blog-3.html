@@ -4,18 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Certifications | Ahmed Malik</title>
-  <meta name="description"
-    content="Professional certifications, licenses, and achievements acquired by Ahmed Malik throughout his career." />
+  <title>Designing Intelligent BI Analytics Systems | Ahmed Malik</title>
+  <meta name="description" content="Read about Designing Intelligent BI Analytics Systems by Ahmed Malik, an expert in AI, software development, and start-up strategy." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-
   <!-- Navigation -->
   <header id="header">
     <nav class="nav-container">
@@ -41,7 +38,6 @@
       </button>
     </nav>
     <div class="nav-border"></div>
-    <!-- Mobile menu -->
     <div class="nav-mobile-menu" id="nav-mobile-menu">
       <a href="index.html#hero" class="nav-mobile-link" id="mobile-link">Home</a>
       <a href="index.html#about" class="nav-mobile-link" id="mobile-link">About</a>
@@ -53,33 +49,27 @@
   </header>
 
   <main>
-    <section class="cert-hero">
-      <h1 class="cert-hero-title">Certifications &amp; Achievements</h1>
-      <p class="cert-hero-subtitle">Professional qualifications, licenses, and specialized training verifying my expertise in technology, management, and innovation.</p>
-    </section>
-
-    <section class="certifications-section">
-      <!-- Full-page embedded PDFs -->
-      <div class="pdf-showcase">
-        <div class="cert-pdf-card">
-          <div class="cert-pdf-header">
-            <h3 class="cert-name">Digital Skills Training Program</h3>
-            <p class="cert-id">ID: 854P589MK <a href="DSTP_Certificate_ 854P589MK.pdf" target="_blank" style="color: var(--accent-blue-solid); text-decoration: none; margin-left: 10px;">(Open in new tab ↗)</a></p>
-          </div>
-          <iframe src="DSTP_Certificate_ 854P589MK.pdf#view=FitH&toolbar=0" class="pdf-iframe" title="Certificate 854P589MK"></iframe>
-        </div>
-
-        <div class="cert-pdf-card">
-          <div class="cert-pdf-header">
-            <h3 class="cert-name">Digital Skills Training Program</h3>
-            <p class="cert-id">ID: A3JC4SMMK <a href="DSTP_Certificate_ A3JC4SMMK.pdf" target="_blank" style="color: var(--accent-blue-solid); text-decoration: none; margin-left: 10px;">(Open in new tab ↗)</a></p>
-          </div>
-          <iframe src="DSTP_Certificate_ A3JC4SMMK.pdf#view=FitH&toolbar=0" class="pdf-iframe" title="Certificate A3JC4SMMK"></iframe>
-        </div>
+    <article class="blog-article">
+      <div class="blog-article-hero">
+        <span class="blog-article-meta">March 02, 2026 — Written by Ahmed Malik</span>
+        <h1 class="blog-article-title">Designing Intelligent BI Analytics Systems</h1>
       </div>
-
-      <!-- Removed other placeholders per user request -->
-    </section>
+      <div class="blog-article-image-container">
+        <img src="images/blog_post_3.png" alt="Designing Intelligent BI Analytics Systems" class="blog-article-image" />
+      </div>
+      <div class="blog-article-content">
+        
+        <p>In an era where every company claims to be "data-driven," the reality is that many organizations construct dashboards that look beautiful but provide zero actionable intelligence. The true objective of a Business Intelligence (BI) system is not just data visualization, but generating clear, unambiguous action-items for stakeholders at a glance. Designing intelligent BI platforms requires merging data engineering seamlessly with behavioral product design.</p>
+        <h2>The Pitfalls of Data Overload</h2>
+        <p>A common mistake in early BI development is presenting users with an overwhelming array of charts, gauges, and metrics on a single screen. This phenomenon, known as 'decision paralysis,' effectively negates the value of the dashboard. Instead, effective product design mandates progressive disclosure. An intelligent system surfaces high-level anomalies or critical KPIs first, allowing users to drill down into the granular data only when necessary.</p>
+        <p>To achieve this, developers must build robust data pipelines using tools like dbt (Data Build Tool) or Snowflake to normalize and pre-aggregate massive datasets. When the frontend requests a metric, it shouldn't involve firing expensive, real-time complex SQL joins. The architecture must serve cached, highly optimized data cubes to keep the interface highly responsive and snappy.</p>
+        <h3>Integrating Predictive ML Models</h3>
+        <p>What separates a standard dashboard from an 'intelligent' BI system is the integration of predictive analytics. Rather than exclusively showing historical data, modern pipelines should execute lightweight machine learning models (like time-series forecasting algorithms) to predict future trends. If inventory churn velocity spikes, the dashboard should autonomously flag this and forecast potential stockout dates based on historical context.</p>
+        <blockquote>"A dashboard answers 'what happened.' An intelligent BI system answers 'why it happened' and 'what you should do about it tomorrow.'"</blockquote>
+        <p>The ultimate goal is autonomous insights. By pairing robust data warehousing with modern frontend frameworks and predictive AI elements, developers can construct BI applications that actively monitor operational health and proactively message stakeholders. This shifts the paradigm from passive data consumption to active, real-time strategic alignment across the entire organization.</p>
+        
+      </div>
+    </article>
   </main>
 
     <!-- Footer -->
@@ -121,5 +111,4 @@
 
   <script src="script.js"></script>
 </body>
-
 </html>

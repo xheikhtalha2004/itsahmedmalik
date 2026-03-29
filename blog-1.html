@@ -4,18 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Certifications | Ahmed Malik</title>
-  <meta name="description"
-    content="Professional certifications, licenses, and achievements acquired by Ahmed Malik throughout his career." />
+  <title>Building Scalable AI Chatbots for Startups | Ahmed Malik</title>
+  <meta name="description" content="Read about Building Scalable AI Chatbots for Startups by Ahmed Malik, an expert in AI, software development, and start-up strategy." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-
   <!-- Navigation -->
   <header id="header">
     <nav class="nav-container">
@@ -41,7 +38,6 @@
       </button>
     </nav>
     <div class="nav-border"></div>
-    <!-- Mobile menu -->
     <div class="nav-mobile-menu" id="nav-mobile-menu">
       <a href="index.html#hero" class="nav-mobile-link" id="mobile-link">Home</a>
       <a href="index.html#about" class="nav-mobile-link" id="mobile-link">About</a>
@@ -53,33 +49,27 @@
   </header>
 
   <main>
-    <section class="cert-hero">
-      <h1 class="cert-hero-title">Certifications &amp; Achievements</h1>
-      <p class="cert-hero-subtitle">Professional qualifications, licenses, and specialized training verifying my expertise in technology, management, and innovation.</p>
-    </section>
-
-    <section class="certifications-section">
-      <!-- Full-page embedded PDFs -->
-      <div class="pdf-showcase">
-        <div class="cert-pdf-card">
-          <div class="cert-pdf-header">
-            <h3 class="cert-name">Digital Skills Training Program</h3>
-            <p class="cert-id">ID: 854P589MK <a href="DSTP_Certificate_ 854P589MK.pdf" target="_blank" style="color: var(--accent-blue-solid); text-decoration: none; margin-left: 10px;">(Open in new tab ↗)</a></p>
-          </div>
-          <iframe src="DSTP_Certificate_ 854P589MK.pdf#view=FitH&toolbar=0" class="pdf-iframe" title="Certificate 854P589MK"></iframe>
-        </div>
-
-        <div class="cert-pdf-card">
-          <div class="cert-pdf-header">
-            <h3 class="cert-name">Digital Skills Training Program</h3>
-            <p class="cert-id">ID: A3JC4SMMK <a href="DSTP_Certificate_ A3JC4SMMK.pdf" target="_blank" style="color: var(--accent-blue-solid); text-decoration: none; margin-left: 10px;">(Open in new tab ↗)</a></p>
-          </div>
-          <iframe src="DSTP_Certificate_ A3JC4SMMK.pdf#view=FitH&toolbar=0" class="pdf-iframe" title="Certificate A3JC4SMMK"></iframe>
-        </div>
+    <article class="blog-article">
+      <div class="blog-article-hero">
+        <span class="blog-article-meta">March 28, 2026 — Written by Ahmed Malik</span>
+        <h1 class="blog-article-title">Building Scalable AI Chatbots for Startups</h1>
       </div>
-
-      <!-- Removed other placeholders per user request -->
-    </section>
+      <div class="blog-article-image-container">
+        <img src="images/blog_post_1.png" alt="Building Scalable AI Chatbots for Startups" class="blog-article-image" />
+      </div>
+      <div class="blog-article-content">
+        
+        <p>In the modern startup ecosystem, engaging users efficiently requires more than just standard FAQ pages. Building scalable AI chatbots has become the fundamental difference between successful customer retention and rapid abandonment. An intelligently designed conversational agent can guide users through sophisticated onboarding procedures, answer complex inquiries immediately, and resolve support tickets autonomously contextually before escalating them to human agents.</p>
+        <h2>The Architecture of Modern LLM Bots</h2>
+        <p>Scaling a chatbot implies supporting thousands of concurrent users while keeping latency under 1.5 seconds. The backbone typically consists of an advanced orchestrator, like LangChain or LlamaIndex, which manages prompt chains and retrieval-augmented generation (RAG). By embedding organizational knowledge into an efficient vector database (like Pinecone or Milvus), the bot can pull hyper-relevant context on the fly.</p>
+        <p>It's crucial to select the right base language model. While GPT-4 is incredibly capable, relying entirely on heavy models can skyrocket infrastructure costs and slow down chat responses. Startups often benefit from utilizing fine-tuned open-source models deployed via dedicated endpoints like vLLM. This approach allows developers to cache frequent tokens, enabling massive throughput and dramatic cost savings.</p>
+        <blockquote>"The best AI agents act less like search engines and more like an experienced employee who knows precisely where company data lives and how to curate it for specific customer requests."</blockquote>
+        <h3>Handling Context and Memory</h3>
+        <p>A frustrating bot makes users repeat themselves. Maintaining contextual memory over long conversational sessions is fundamentally challenging. Instead of passing the entire dialogue string repeatedly—which exhausts token limits rapidly—startups must adopt summarization techniques. Leveraging secondary, smaller LLMs to compress dialogue history into concise behavioral summaries provides the main bot with long-term memory without blowing up latency.</p>
+        <p>Ultimately, a chatbot's scalability is tested not just by volume, but by its ability to gracefully degrade during unexpected edge cases. By implementing reliable fallback mechanisms and intelligent human hand-offs smoothly, startups ensure the user experience remains premium even when the AI reaches its conceptual limits.</p>
+        
+      </div>
+    </article>
   </main>
 
     <!-- Footer -->
@@ -121,5 +111,4 @@
 
   <script src="script.js"></script>
 </body>
-
 </html>

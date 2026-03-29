@@ -2,6 +2,52 @@
    ELITEFOLIO — JavaScript Interactions
    ============================================ */
 
+// ===== MOBILE NAV MENU TOGGLE =====
+;(function () {
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('nav-mobile-menu');
+    const mobileLinks = document.querySelectorAll('.nav-mobile-link');
+    
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        const isExpanded = mobileMenu.classList.contains('active');
+        hamburger.setAttribute('aria-expanded', isExpanded);
+        
+        // Optional: animate hamburger lines to form X
+        const spans = hamburger.querySelectorAll('span');
+        if (spans.length === 3) {
+          if (isExpanded) {
+            spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+          } else {
+            spans[0].style.transform = 'translateY(0) rotate(0)';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'translateY(0) rotate(0)';
+          }
+        }
+      });
+      
+      // Close menu when a link is clicked
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+          
+          const spans = hamburger.querySelectorAll('span');
+          if (spans.length === 3) {
+            spans[0].style.transform = 'translateY(0) rotate(0)';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'translateY(0) rotate(0)';
+          }
+        });
+      });
+    }
+  });
+})();
+
 // ===== HEADER HIDE/SHOW ON SCROLL =====
 ;(function () {
   const header = document.getElementById('header');
@@ -57,9 +103,6 @@ function toggleFaq(id) {
 
   elements.forEach((el, i) => {
     el.classList.add('animate-on-scroll');
-    // Add stagger delays for grid items
-    const delay = (i % 4) * 0.08;
-    el.style.transitionDelay = `${delay}s`;
   });
 
   const observer = new IntersectionObserver(

@@ -19,31 +19,46 @@
   <!-- Navigation -->
   <header id="header">
     <nav class="nav-container">
-      <span class="nav-plus">+</span>
       <div class="nav-links-left">
-        <a href="#blog" class="nav-link">Blog</a>
-        <span class="nav-divider">/</span>
-        <a href="certifications.html" class="nav-link">Certification</a>
+        <a href="#hero" class="nav-link">Home</a>
         <span class="nav-divider">/</span>
         <a href="#about" class="nav-link">About</a>
-      </div>
-      <a href="#" class="nav-logo">ELITEFOLIO</a>
-      <div class="nav-links-right">
-        <a href="#work" class="nav-link">Work</a>
         <span class="nav-divider">/</span>
-        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#work" class="nav-link">Work</a>
       </div>
-      <span class="nav-plus">+</span>
+      <a href="#hero" class="nav-logo">
+        <img src="images/gradient_logo.svg" alt="Ahmed Malik Logo" class="nav-logo-img" />
+      </a>
+      <div class="nav-links-right">
+        <a href="certifications.html" class="nav-link">Certifications</a>
+        <span class="nav-divider">/</span>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <span class="nav-divider">/</span>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
     <div class="nav-border"></div>
+    <!-- Mobile menu -->
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="#hero" class="nav-mobile-link" id="mobile-link">Home</a>
+      <a href="#about" class="nav-mobile-link" id="mobile-link">About</a>
+      <a href="#work" class="nav-mobile-link" id="mobile-link">Work</a>
+      <a href="certifications.html" class="nav-mobile-link">Certifications</a>
+      <a href="blog.html" class="nav-mobile-link" id="mobile-link">Blog</a>
+      <a href="contact.html" class="nav-mobile-link" id="mobile-link">Contact</a>
+    </div>
   </header>
 
   <main>
 
     <!-- Hero Section -->
     <section id="hero" class="hero">
+      <div class="hero-wordmark" aria-hidden="true">AHMED MALIK</div>
       <div class="hero-image-container">
-        <img src="images/hero_portrait.svg" alt="ELITEFOLIO - Brand designer and illustrator profile portrait"
+        <img src="images/hero_portrait.svg" alt="Ahmed Malik - Software Developer and AI Expert profile portrait"
           class="hero-portrait" />
         <div class="hero-glow"></div>
       </div>
@@ -134,6 +149,11 @@
       </div>
     </section>
 
+    <!-- Why Choose Me Section -->
+    <section class="why-choose">
+      <h2 class="why-title">Why Choose Me?</h2>
+    </section>
+
     <!-- Values / About Section -->
     <section id="about" class="values-section">
       <div class="values-content">
@@ -153,7 +173,7 @@
           <div class="value-item" id="value-strategy">
             <div class="value-header">
               <h3 class="value-title">Strategic Thinking</h3>
-              <span class="value-arrow-diag">↗</span>
+              <span class="value-arrow">→</span>
             </div>
             <div class="value-desc">
               <p>I combine technology, data, and business strategy to turn ideas into scalable products that solve real-world problems and drive business growth. I identify opportunities, mitigate risks, and plan for long-term success.</p>
@@ -164,7 +184,7 @@
           <div class="value-item" id="value-communication">
             <div class="value-header">
               <h3 class="value-title">Public Communication</h3>
-              <span class="value-arrow-diag">↗</span>
+              <span class="value-arrow">→</span>
             </div>
             <div class="value-desc">
               <p>Strong in public speaking, presentations, and stakeholder engagement, I ensure teams, investors, and clients clearly understand the vision and direction, building trust and alignment.</p>
@@ -175,7 +195,7 @@
           <div class="value-item" id="value-execution">
             <div class="value-header">
               <h3 class="value-title">Execution &amp; Delivery</h3>
-              <span class="value-arrow-diag">↗</span>
+              <span class="value-arrow">→</span>
             </div>
             <div class="value-desc">
               <p>Focused on transforming ideas into reality—from AI systems, software solutions, and products to marketing strategies and startup growth initiatives. I ensure high-quality outcomes on time and within scope.</p>
@@ -186,7 +206,7 @@
           <div class="value-item" id="value-innovation">
             <div class="value-header">
               <h3 class="value-title">Innovation &amp; Problem Solving</h3>
-              <span class="value-arrow-diag">↗</span>
+              <span class="value-arrow">→</span>
             </div>
             <div class="value-desc">
               <p>I thrive on tackling complex challenges with creative and practical solutions, using AI, data analytics, and cutting-edge technologies to drive meaningful results.</p>
@@ -197,7 +217,7 @@
           <div class="value-item" id="value-adaptability">
             <div class="value-header">
               <h3 class="value-title">Adaptability &amp; Growth Mindset</h3>
-              <span class="value-arrow-diag">↗</span>
+              <span class="value-arrow">→</span>
             </div>
             <div class="value-desc">
               <p>Able to navigate fast-changing tech landscapes, I embrace learning, adapt strategies, and pivot quickly to seize opportunities in evolving markets.</p>
@@ -208,7 +228,7 @@
           <div class="value-item" id="value-vision">
             <div class="value-header">
               <h3 class="value-title">Vision &amp; Impact</h3>
-              <span class="value-arrow-diag">↗</span>
+              <span class="value-arrow">→</span>
             </div>
             <div class="value-desc">
               <p>I build products and strategies that not only succeed commercially but also create lasting value for users, businesses, and communities.</p>
@@ -218,17 +238,12 @@
 
         </div>
         <div class="values-image">
-          <img src="images/laptop_blueprint.png"
-            alt="Ahmed Malik — leadership and strategy workspace" class="laptop-img" />
+          <img src="images/why_choose_me.png"
+            alt="Ahmed Malik — why choose me workspace" class="laptop-img" />
         </div>
       </div>
     </section>
 
-
-    <!-- Why Choose Me Section -->
-    <section class="why-choose">
-      <h2 class="why-title">Why Choose Me?</h2>
-    </section>
 
     <!-- Educational Background Section -->
     <section id="experience" class="experience-section">
@@ -581,97 +596,42 @@
       </div>
     </section>
 
-    <!-- Blog Section -->
-    <section id="blog" class="blog-section">
-      <h2 class="blog-title">What is Design Event?</h2>
-      <div class="blog-grid">
-        <a href="#" class="blog-card">
-          <div class="blog-image-wrapper">
-            <img src="images/blog_post_1.png" alt="Design Tips for Better User Interaction Experiences blog post cover"
-              class="blog-img" />
-          </div>
-          <div class="blog-info">
-            <span class="blog-date">August 20, 2024</span>
-            <h3 class="blog-post-title">Design Tips for Better User Interaction Experiences</h3>
-            <a href="#" class="learn-more">Learn More →</a>
-          </div>
-        </a>
-        <a href="#" class="blog-card">
-          <div class="blog-image-wrapper">
-            <img src="images/blog_post_2.png" alt="The Intersection of Design and Technology Simplified blog post cover"
-              class="blog-img" />
-          </div>
-          <div class="blog-info">
-            <span class="blog-date">January 14, 2025</span>
-            <h3 class="blog-post-title">The Intersection of Design and Technology Simplified</h3>
-            <a href="#" class="learn-more">Learn More →</a>
-          </div>
-        </a>
-        <a href="#" class="blog-card">
-          <div class="blog-image-wrapper">
-            <img src="images/blog_post_3.png" alt="Effective Design Solutions for Business Growth blog post cover"
-              class="blog-img" />
-          </div>
-          <div class="blog-info">
-            <span class="blog-date">December 10, 2024</span>
-            <h3 class="blog-post-title">Effective Design Solutions for Business Growth</h3>
-            <a href="#" class="learn-more">Learn More →</a>
-          </div>
-        </a>
-      </div>
-    </section>
-
   </main>
 
-  <!-- Footer -->
-  <footer id="contact" class="footer">
+    <!-- Footer -->
+  <footer class="footer">
     <div class="footer-top">
       <div class="footer-brand">
-        <p class="footer-logo">ELITEFOLIO</p>
-        <p class="footer-tagline">Get weekly news on ELITEFOLIO.</p>
+        <img src="images/gradient_logo.svg" alt="Ahmed Malik Logo" class="footer-logo-img" style="height:40px; margin-bottom:1rem;" />
+        <p class="footer-tagline">Get weekly news on itsahmedmalik</p>
         <form class="newsletter-form" onsubmit="return false;">
           <input type="email" placeholder="Enter your email" class="newsletter-input" />
           <button type="submit" class="newsletter-btn">Subscribe</button>
         </form>
+        <div style="margin-top: 2rem;">
+          <a href="contact.html" class="newsletter-btn" style="text-decoration:none; display:inline-block; font-family:var(--font-mono);">Schedule a meeting ↗</a>
+        </div>
       </div>
       <div class="footer-links">
         <div class="footer-col">
           <p class="footer-col-title">Features</p>
-          <a href="#about" class="footer-link">About</a>
-          <a href="#work" class="footer-link">Work</a>
-          <a href="#blog" class="footer-link">Blog</a>
+          <!-- Absolute Links so they work from any subpage -->
+          <a href="index.html#about" class="footer-link">About</a>
+          <a href="index.html#work" class="footer-link">Work</a>
+          <a href="certifications.html" class="footer-link">Certifications</a>
+          <a href="blog.html" class="footer-link">Blog</a>
+          <a href="contact.html" class="footer-link">Contact</a>
         </div>
         <div class="footer-col">
           <p class="footer-col-title">Company</p>
-          <a href="#" class="footer-link">Behance</a>
-          <a href="#" class="footer-link">Dribble</a>
+          <a href="https://tamxai.com" target="_blank" rel="noopener noreferrer" class="footer-link">TAMx</a>
+          <a href="#" class="footer-link">QuickSliver</a>
         </div>
       </div>
     </div>
-    <div class="footer-wordmark">ELITEFOLIO</div>
+    <div class="footer-wordmark">AHMED MALIK</div>
     <div class="footer-bottom">
-      <p class="footer-copyright">2025 © ELITEFOLIO Copyright By WebTemp Studio</p>
-      <div class="footer-social">
-        <span class="connect-text">Connect with</span>
-        <a href="#" class="social-icon" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-            <path
-              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-          </svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-            <path
-              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-          </svg>
-        </a>
-        <a href="#" class="social-icon" aria-label="Twitter / X">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-            <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.745l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-          </svg>
-        </a>
-      </div>
+      <p class="footer-copyright">2026 © Ahmed Malik Copyright</p>
     </div>
   </footer>
 
