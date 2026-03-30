@@ -363,7 +363,7 @@ h1, h2, h3 {
 }
 
 .service-title {
-  font-size: clamp(2.2rem, 5.5vw, 5rem);
+  font-size: clamp(1.8rem, 4.3vw, 3.9rem);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -627,7 +627,7 @@ h1, h2, h3 {
 }
 
 .why-title {
-  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-size: clamp(2.8rem, 8vw, 7rem);
   font-weight: 900;
   letter-spacing: -0.04em;
   color: var(--text-primary);
@@ -1032,6 +1032,17 @@ h1, h2, h3 {
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
   align-items: start;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(34, 136, 255, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0));
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.015) inset;
+}
+
+.faq-left {
+  padding-right: 1rem;
 }
 
 .faq-title {
@@ -1053,10 +1064,14 @@ h1, h2, h3 {
 .faq-list {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
 .faq-item {
-  border-bottom: 1px solid var(--border-color);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  transition: border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .faq-question {
@@ -1076,11 +1091,20 @@ h1, h2, h3 {
   gap: 1rem;
   transition: color var(--transition-fast);
   letter-spacing: -0.01em;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .faq-question:hover {
   color: var(--text-primary);
   opacity: 0.85;
+}
+
+.faq-item:hover,
+.faq-item.open {
+  border-color: rgba(34, 136, 255, 0.35);
+  background: linear-gradient(180deg, rgba(34,136,255,0.08), rgba(255,255,255,0.02));
+  box-shadow: 0 0 28px rgba(34, 136, 255, 0.08);
 }
 
 .faq-icon {
@@ -1105,7 +1129,7 @@ h1, h2, h3 {
   color: var(--text-secondary);
   line-height: 1.75;
   font-family: 'Courier New', Courier, monospace;
-  padding-bottom: 1.25rem;
+  padding: 0 1.25rem 1.25rem;
 }
 
 .faq-item.open .faq-answer {
@@ -1620,6 +1644,10 @@ h1, h2, h3 {
   .faq-content {
     grid-template-columns: 1fr;
     gap: 3rem;
+  }
+
+  .faq-left {
+    padding-right: 0;
   }
 
   .experience-grid {
