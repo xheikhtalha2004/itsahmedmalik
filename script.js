@@ -245,12 +245,12 @@ function toggleFaq(id) {
     const btn = form.querySelector('.newsletter-btn');
     
     if (input.value && input.value.includes('@')) {
-      btn.textContent = 'Subscribed!';
+      btn.textContent = 'Noted!';
       btn.style.background = '#0ACF83';
       input.value = '';
       
       setTimeout(() => {
-        btn.textContent = 'Subscribe';
+        btn.textContent = 'Let me know';
         btn.style.background = '';
       }, 3000);
     }
