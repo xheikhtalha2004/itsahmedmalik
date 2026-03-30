@@ -1,4 +1,4 @@
-import os
+﻿import os
 import glob
 import re
 
@@ -13,7 +13,7 @@ new_footer = """  <!-- Footer -->
           <button type="submit" class="newsletter-btn">Let me know</button>
         </form>
         <div style="margin-top: 2rem;">
-          <a href="contact.html" class="newsletter-btn" style="text-decoration:none; display:inline-block; font-family:var(--font-mono);">Schedule a meeting ↗</a>
+          <a href="contact.html" class="newsletter-btn" style="text-decoration:none; display:inline-block; font-family:var(--font-mono);">Contact Now &#8594;</a>
         </div>
       </div>
       <div class="footer-links">
@@ -34,7 +34,7 @@ new_footer = """  <!-- Footer -->
     </div>
     <div class="footer-wordmark">AHMED MALIK</div>
     <div class="footer-bottom">
-      <p class="footer-copyright">2026 © Ahmed Malik Copyright</p>
+      <p class="footer-copyright">2026 Â© Ahmed Malik Copyright</p>
     </div>
   </footer>"""
 
@@ -60,3 +60,6 @@ for file in html_files:
         f.write(content)
 
     print(f"Updated {file}")
+
+
+

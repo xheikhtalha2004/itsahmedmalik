@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -144,15 +144,60 @@
           <textarea id="messageText" class="contact-textarea" placeholder="Type a message" required></textarea>
         </div>
 
-        <button type="submit" class="contact-submit-btn">
-          Contact Now 
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </button>
+        <div class="contact-form-actions">
+          <button type="submit" class="contact-submit-btn">
+            Contact Now
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+          <button type="button" class="contact-submit-btn contact-secondary-btn" id="open-meeting-modal">
+            Schedule a meeting
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </button>
+        </div>
       </form>
     </section>
   </main>
 
-    <!-- Footer -->
+  <div class="meeting-modal" id="meeting-modal" aria-hidden="true">
+    <div class="meeting-modal-backdrop" data-close-meeting-modal></div>
+    <div class="meeting-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="meeting-modal-title">
+      <button type="button" class="meeting-modal-close" id="close-meeting-modal" aria-label="Close schedule a meeting dialog">&times;</button>
+      <div class="meeting-modal-header">
+        <p class="meeting-modal-eyebrow">Schedule a meeting</p>
+        <h2 class="meeting-modal-title" id="meeting-modal-title">Choose a date and time</h2>
+        <p class="meeting-modal-subtitle">Pick an available day and slot for your meeting. Unavailable days are disabled.</p>
+      </div>
+      <div class="meeting-scheduler">
+        <div class="meeting-calendar-panel">
+          <div class="meeting-calendar-header">
+            <button type="button" class="meeting-calendar-nav" id="meeting-prev-month" aria-label="Previous month">&#8249;</button>
+            <h3 class="meeting-calendar-month" id="meeting-current-month">Month</h3>
+            <button type="button" class="meeting-calendar-nav" id="meeting-next-month" aria-label="Next month">&#8250;</button>
+          </div>
+          <div class="meeting-weekdays">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+          </div>
+          <div class="meeting-calendar-grid" id="meeting-calendar-grid"></div>
+        </div>
+        <div class="meeting-slots-panel">
+          <h3 class="meeting-slots-title">Available slots</h3>
+          <div class="meeting-slots-grid" id="meeting-slots-grid"></div>
+        </div>
+      </div>
+      <div class="meeting-modal-footer">
+        <p class="meeting-summary" id="meeting-summary">Select a date and time for your meeting.</p>
+        <button type="button" class="contact-submit-btn meeting-confirm-btn" id="confirm-meeting" disabled>Schedule a meeting</button>
+      </div>
+    </div>
+  </div>
+
+      <!-- Footer -->
   <footer class="footer">
     <div class="footer-top">
       <div class="footer-brand">
@@ -163,7 +208,7 @@
           <button type="submit" class="newsletter-btn">Let me know</button>
         </form>
         <div style="margin-top: 2rem;">
-          <a href="contact.html" class="newsletter-btn" style="text-decoration:none; display:inline-block; font-family:var(--font-mono);">Schedule a meeting ↗</a>
+          <a href="contact.html" class="newsletter-btn" style="text-decoration:none; display:inline-block; font-family:var(--font-mono);">Contact Now &#8594;</a>
         </div>
       </div>
       <div class="footer-links">
@@ -184,10 +229,13 @@
     </div>
     <div class="footer-wordmark">AHMED MALIK</div>
     <div class="footer-bottom">
-      <p class="footer-copyright">2026 © Ahmed Malik Copyright</p>
+      <p class="footer-copyright">2026 Â© Ahmed Malik Copyright</p>
     </div>
   </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
+
+
+

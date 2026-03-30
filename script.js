@@ -304,3 +304,197 @@ function toggleFaq(id) {
 
   updateSlider();
 })();
+
+// ===== SCHEDULE A MEETING MODAL =====
+;(function () {
+  const modal = document.getElementById('meeting-modal');
+  const openBtn = document.getElementById('open-meeting-modal');
+  const closeBtn = document.getElementById('close-meeting-modal');
+  const calendarGrid = document.getElementById('meeting-calendar-grid');
+  const monthLabel = document.getElementById('meeting-current-month');
+  const prevMonthBtn = document.getElementById('meeting-prev-month');
+  const nextMonthBtn = document.getElementById('meeting-next-month');
+  const slotsGrid = document.getElementById('meeting-slots-grid');
+  const summary = document.getElementById('meeting-summary');
+  const confirmBtn = document.getElementById('confirm-meeting');
+
+  if (!modal || !openBtn || !closeBtn || !calendarGrid || !monthLabel || !prevMonthBtn || !nextMonthBtn || !slotsGrid || !summary || !confirmBtn) {
+    return;
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const bookedOffsets = [2, 5, 9, 14, 18];
+  const bookedDates = new Set(
+    bookedOffsets.map((offset) => {
+      const date = new Date(today);
+      date.setDate(today.getDate() + offset);
+      return date.toDateString();
+    })
+  );
+
+  const timeSlots = Array.from({ length: 18 }, (_, index) => {
+    const totalMinutes = 9 * 60 + index * 30;
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+  });
+
+  let currentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  let selectedDate = null;
+  let selectedTime = null;
+
+  const formatSummary = () => {
+    if (!selectedDate || !selectedTime) {
+      summary.textContent = 'Select a date and time for your meeting.';
+      confirmBtn.disabled = true;
+      return;
+    }
+
+    summary.textContent = `Your meeting is scheduled for ${selectedDate.toLocaleDateString('en-US', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long'
+    })} at ${selectedTime}.`;
+    confirmBtn.disabled = false;
+  };
+
+  const renderSlots = () => {
+    slotsGrid.innerHTML = '';
+
+    if (!selectedDate) {
+      const empty = document.createElement('p');
+      empty.className = 'meeting-summary';
+      empty.textContent = 'Choose a date to see available meeting times.';
+      slotsGrid.appendChild(empty);
+      formatSummary();
+      return;
+    }
+
+    timeSlots.forEach((time) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'meeting-slot';
+      button.textContent = time;
+
+      if (selectedTime === time) {
+        button.classList.add('is-selected');
+      }
+
+      button.addEventListener('click', () => {
+        selectedTime = time;
+        renderSlots();
+        formatSummary();
+      });
+
+      slotsGrid.appendChild(button);
+    });
+
+    formatSummary();
+  };
+
+  const renderCalendar = () => {
+    calendarGrid.innerHTML = '';
+    monthLabel.textContent = currentMonth.toLocaleDateString('en-US', {
+      month: 'long',
+      year: 'numeric'
+    });
+
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const firstWeekday = firstDay.getDay();
+    const totalCells = Math.ceil((firstWeekday + lastDay.getDate()) / 7) * 7;
+
+    for (let index = 0; index < totalCells; index += 1) {
+      const dayNumber = index - firstWeekday + 1;
+      const cellDate = new Date(year, month, dayNumber);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'meeting-day';
+      button.textContent = String(cellDate.getDate());
+
+      const isCurrentMonth = cellDate.getMonth() === month;
+      const isPast = cellDate < today;
+      const isWeekend = cellDate.getDay() === 0 || cellDate.getDay() === 6;
+      const isBooked = bookedDates.has(cellDate.toDateString());
+      const isDisabled = !isCurrentMonth || isPast || isWeekend || isBooked;
+
+      if (!isCurrentMonth) {
+        button.classList.add('is-muted');
+      }
+
+      if (isDisabled) {
+        button.classList.add('is-disabled');
+        button.disabled = true;
+      }
+
+      if (selectedDate && cellDate.toDateString() === selectedDate.toDateString()) {
+        button.classList.add('is-selected');
+      }
+
+      if (!isDisabled && isCurrentMonth) {
+        button.addEventListener('click', () => {
+          selectedDate = new Date(cellDate);
+          selectedTime = null;
+          renderCalendar();
+          renderSlots();
+        });
+      }
+
+      calendarGrid.appendChild(button);
+    }
+  };
+
+  const openModal = () => {
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  openBtn.addEventListener('click', () => {
+    openModal();
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.querySelectorAll('[data-close-meeting-modal]').forEach((element) => {
+    element.addEventListener('click', closeModal);
+  });
+
+  prevMonthBtn.addEventListener('click', () => {
+    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+    renderCalendar();
+  });
+
+  nextMonthBtn.addEventListener('click', () => {
+    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+    renderCalendar();
+  });
+
+  confirmBtn.addEventListener('click', () => {
+    if (!selectedDate || !selectedTime) return;
+    alert(`Your meeting is scheduled for ${selectedDate.toLocaleDateString('en-US', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long'
+    })} at ${selectedTime}.`);
+    closeModal();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+
+  renderCalendar();
+  renderSlots();
+})();
