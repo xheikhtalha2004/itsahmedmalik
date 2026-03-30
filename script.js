@@ -256,3 +256,51 @@ function toggleFaq(id) {
     }
   });
 })();
+
+// ===== TESTIMONIALS SLIDER =====
+;(function () {
+  const track = document.getElementById('testimonials-track');
+  const prevBtn = document.getElementById('testimonial-prev');
+  const nextBtn = document.getElementById('testimonial-next');
+  const dotsContainer = document.getElementById('testimonial-dots');
+
+  if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+
+  const slides = Array.from(track.querySelectorAll('.testimonial-card'));
+  if (!slides.length) return;
+
+  let currentIndex = 0;
+
+  const updateSlider = () => {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    dotsContainer.querySelectorAll('.testimonial-dot').forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+      dot.setAttribute('aria-current', index === currentIndex ? 'true' : 'false');
+    });
+  };
+
+  slides.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'testimonial-dot';
+    dot.setAttribute('aria-label', `Go to testimonial ${index + 1}`);
+    dot.addEventListener('click', () => {
+      currentIndex = index;
+      updateSlider();
+    });
+    dotsContainer.appendChild(dot);
+  });
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateSlider();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateSlider();
+  });
+
+  updateSlider();
+})();
