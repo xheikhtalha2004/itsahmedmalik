@@ -176,17 +176,12 @@ function toggleFaq(id) {
   let player = null;
   let playerReady = false;
   let shouldPlay = false;
-  let allowSound = false;
 
   const syncPlayback = () => {
     if (!playerReady || !player) return;
 
     if (shouldPlay) {
-      if (allowSound) {
-        player.unMute();
-      } else {
-        player.mute();
-      }
+      player.mute();
       player.playVideo();
     } else {
       player.pauseVideo();
@@ -216,27 +211,22 @@ function toggleFaq(id) {
       events: {
         onReady: (event) => {
           playerReady = true;
-          if (allowSound) {
-            event.target.unMute();
-          } else {
-            event.target.mute();
-          }
+          event.target.mute();
           syncPlayback();
         }
       }
     });
   };
 
-  const enableSound = () => {
-    allowSound = true;
-    syncPlayback();
-  };
-
-  ['pointerdown', 'keydown', 'touchstart', 'wheel'].forEach((eventName) => {
-    window.addEventListener(eventName, enableSound, { once: true, passive: true });
-  });
-
   const loadYouTubeApi = () => {
+    try {
+      const url = new URL(iframe.src);
+      url.searchParams.set('origin', window.location.origin);
+      iframe.src = url.toString();
+    } catch (error) {
+      // Ignore URL parsing issues and fall back to the existing embed URL.
+    }
+
     if (window.YT && typeof window.YT.Player === 'function') {
       bootPlayer();
       return;
