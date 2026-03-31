@@ -98,7 +98,7 @@ function toggleFaq(id) {
 // ===== SCROLL ANIMATIONS (Intersection Observer) =====
 ;(function () {
   const elements = document.querySelectorAll(
-    '.service-row, .project-card, .exp-card, .testimonial-card, .blog-card, .value-item, .faq-item'
+    '.service-row, .project-card, .exp-card, .testimonial-card, .blog-card, .blog-feature-card, .blog-archive-card, .value-item, .faq-item'
   );
 
   elements.forEach((el, i) => {
@@ -260,6 +260,7 @@ function toggleFaq(id) {
     }
   });
 })();
+
 
 // ===== NEWSLETTER FORM FEEDBACK =====
 ;(function () {
