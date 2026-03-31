@@ -166,6 +166,100 @@ function toggleFaq(id) {
   });
 })();
 
+// ===== INTRO VIDEO PLAY/PAUSE ON SECTION VISIBILITY =====
+;(function () {
+  const iframe = document.getElementById('intro-video-player');
+  const section = document.querySelector('.intro-video-section');
+
+  if (!iframe || !section) return;
+
+  let player = null;
+  let playerReady = false;
+  let shouldPlay = false;
+  let allowSound = false;
+
+  const syncPlayback = () => {
+    if (!playerReady || !player) return;
+
+    if (shouldPlay) {
+      if (allowSound) {
+        player.unMute();
+      } else {
+        player.mute();
+      }
+      player.playVideo();
+    } else {
+      player.pauseVideo();
+    }
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    const entry = entries[0];
+    shouldPlay = Boolean(entry && entry.isIntersecting && entry.intersectionRatio >= 0.45);
+    syncPlayback();
+  }, {
+    threshold: [0.15, 0.45, 0.75]
+  });
+
+  observer.observe(section);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && playerReady && player) {
+      player.pauseVideo();
+    } else {
+      syncPlayback();
+    }
+  });
+
+  const bootPlayer = () => {
+    player = new window.YT.Player('intro-video-player', {
+      events: {
+        onReady: (event) => {
+          playerReady = true;
+          if (allowSound) {
+            event.target.unMute();
+          } else {
+            event.target.mute();
+          }
+          syncPlayback();
+        }
+      }
+    });
+  };
+
+  const enableSound = () => {
+    allowSound = true;
+    syncPlayback();
+  };
+
+  ['pointerdown', 'keydown', 'touchstart', 'wheel'].forEach((eventName) => {
+    window.addEventListener(eventName, enableSound, { once: true, passive: true });
+  });
+
+  const loadYouTubeApi = () => {
+    if (window.YT && typeof window.YT.Player === 'function') {
+      bootPlayer();
+      return;
+    }
+
+    const previousReady = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      if (typeof previousReady === 'function') {
+        previousReady();
+      }
+      bootPlayer();
+    };
+
+    if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(script);
+    }
+  };
+
+  loadYouTubeApi();
+})();
+
 // ===== TESTIMONIALS INFINITE MARQUEE (row 1 scrolls left, row 2 right) =====
 ;(function () {
   const grid = document.querySelector('.testimonials-grid');
