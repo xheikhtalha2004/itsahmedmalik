@@ -166,33 +166,6 @@ function toggleFaq(id) {
   });
 })();
 
-// ===== INTRO VIDEO VISIBILITY PLAYBACK =====
-;(function () {
-  const video = document.getElementById('intro-video-player');
-  if (!video) return;
-
-  video.muted = true;
-
-  const tryPlay = () => {
-    const playPromise = video.play();
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(() => {});
-    }
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        tryPlay();
-      } else {
-        video.pause();
-      }
-    });
-  }, { threshold: 0.45 });
-
-  observer.observe(video);
-})();
-
 // ===== TESTIMONIALS INFINITE MARQUEE (row 1 scrolls left, row 2 right) =====
 ;(function () {
   const grid = document.querySelector('.testimonials-grid');
