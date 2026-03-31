@@ -181,7 +181,6 @@ function toggleFaq(id) {
     if (!playerReady || !player) return;
 
     if (shouldPlay) {
-      player.mute();
       player.playVideo();
     } else {
       player.pauseVideo();
@@ -211,6 +210,7 @@ function toggleFaq(id) {
       events: {
         onReady: (event) => {
           playerReady = true;
+          event.target.setVolume(100);
           event.target.mute();
           syncPlayback();
         }
