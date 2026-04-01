@@ -98,7 +98,7 @@ function toggleFaq(id) {
 // ===== SCROLL ANIMATIONS (Intersection Observer) =====
 ;(function () {
   const elements = document.querySelectorAll(
-    '.service-row, .project-card, .exp-card, .testimonial-card, .blog-card, .blog-feature-card, .blog-archive-card, .value-item, .faq-item'
+    '.service-row, .project-card, .exp-card, .testimonial-card, .blog-card, .blog-feature-card, .blog-archive-card, .value-item, .faq-item, .dashboard-panel, .dashboard-projects-panel, .dashboard-project-slide'
   );
 
   elements.forEach((el, i) => {
@@ -257,6 +257,63 @@ function toggleFaq(id) {
 
   // We'll just let the static grid display — marquee is a bonus enhancement
   // For now, the grid is properly displayed
+})();
+
+// ===== DASHBOARD PROJECT CAROUSEL =====
+;(function () {
+  const carousel = document.getElementById('dashboard-carousel');
+  const track = document.getElementById('dashboard-carousel-track');
+  const prevBtn = document.getElementById('dashboard-prev');
+  const nextBtn = document.getElementById('dashboard-next');
+  const dotsContainer = document.getElementById('dashboard-dots');
+
+  if (!carousel || !track || !prevBtn || !nextBtn || !dotsContainer) return;
+
+  const slides = Array.from(track.querySelectorAll('.dashboard-project-slide'));
+  if (!slides.length) return;
+
+  let currentIndex = 0;
+
+  const updateControls = () => {
+    dotsContainer.querySelectorAll('.dashboard-dot').forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+      dot.setAttribute('aria-current', index === currentIndex ? 'true' : 'false');
+    });
+
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === slides.length - 1;
+  };
+
+  const showIndex = (index) => {
+    currentIndex = Math.max(0, Math.min(slides.length - 1, index));
+    track.style.transform = `translateX(-${slides[currentIndex].offsetLeft}px)`;
+    updateControls();
+  };
+
+  slides.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'dashboard-dot';
+    dot.setAttribute('aria-label', `Go to project ${index + 1}`);
+    dot.addEventListener('click', () => {
+      showIndex(index);
+    });
+    dotsContainer.appendChild(dot);
+  });
+
+  prevBtn.addEventListener('click', () => {
+    showIndex(currentIndex - 1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    showIndex(currentIndex + 1);
+  });
+
+  window.addEventListener('resize', () => {
+    showIndex(currentIndex);
+  });
+
+  showIndex(0);
 })();
 
 // ===== SECTION HIGHLIGHTING IN NAV =====

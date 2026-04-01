@@ -1,4 +1,4 @@
-﻿import os
+import os
 import glob
 import re
 
@@ -34,7 +34,7 @@ new_footer = """  <!-- Footer -->
     </div>
     <div class="footer-wordmark">AHMED MALIK</div>
     <div class="footer-bottom">
-      <p class="footer-copyright">2026 Â© Ahmed Malik Copyright</p>
+      <p class="footer-copyright">2026 &copy; Ahmed Malik Copyright</p>
     </div>
   </footer>"""
 
