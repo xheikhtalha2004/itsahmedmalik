@@ -447,6 +447,246 @@ function toggleFaq(id) {
   updateSlider();
 })();
 
+// ===== CERTIFICATIONS FOCUS RAIL =====
+;(function () {
+  const rail = document.getElementById('certifications-rail');
+  const track = document.getElementById('certifications-track');
+  const prevBtn = document.getElementById('certifications-prev');
+  const nextBtn = document.getElementById('certifications-next');
+  const dotsContainer = document.getElementById('certifications-dots');
+  const badge = document.getElementById('certifications-badge');
+  const title = document.getElementById('certifications-title');
+  const description = document.getElementById('certifications-desc');
+  const counter = document.getElementById('certifications-counter');
+  const ambienceImage = document.getElementById('certifications-ambience-image');
+  const expandBtn = document.getElementById('certifications-expand');
+  const modal = document.getElementById('certifications-modal');
+  const modalImage = document.getElementById('certifications-modal-image');
+  const modalTitle = document.getElementById('certifications-modal-title');
+  const modalBadge = document.getElementById('certifications-modal-badge');
+  const closeModalBtn = document.getElementById('close-certifications-modal');
+
+  if (!rail || !track || !prevBtn || !nextBtn || !dotsContainer) return;
+
+  const cards = Array.from(track.querySelectorAll('.cert-focus-card'));
+  if (!cards.length) return;
+
+  let currentIndex = 0;
+  let lastWheelTime = 0;
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  const wrapIndex = (value) => (value + cards.length) % cards.length;
+
+  const getShortestOffset = (index) => {
+    let offset = index - currentIndex;
+    const half = Math.floor(cards.length / 2);
+
+    if (offset > half) offset -= cards.length;
+    if (offset < -half) offset += cards.length;
+
+    return offset;
+  };
+
+  const goTo = (index) => {
+    currentIndex = wrapIndex(index);
+    updateRail();
+  };
+
+  const getCardMeta = (card) => {
+    if (!card) return null;
+
+    const image = card.dataset.certImage || card.querySelector('img')?.getAttribute('src') || '';
+    const alt = card.querySelector('img')?.getAttribute('alt') || '';
+
+    return {
+      badge: card.dataset.certBadge || '',
+      title: card.dataset.certTitle || '',
+      description: card.dataset.certDesc || '',
+      image,
+      alt
+    };
+  };
+
+  const openModal = (card) => {
+    if (!modal) return;
+
+    const meta = getCardMeta(card);
+    if (!meta) return;
+
+    if (modalImage) {
+      modalImage.setAttribute('src', meta.image);
+      modalImage.setAttribute('alt', meta.alt || meta.title);
+    }
+
+    if (modalTitle) modalTitle.textContent = meta.title;
+    if (modalBadge) modalBadge.textContent = meta.badge;
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    if (!modal) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  const updateRail = () => {
+    const activeCard = cards[currentIndex];
+    if (!activeCard) return;
+
+    const activeMeta = getCardMeta(activeCard);
+    if (!activeMeta) return;
+
+    const activeImage = activeMeta.image;
+    if (ambienceImage && activeImage) {
+      ambienceImage.setAttribute('src', activeImage);
+    }
+
+    if (badge) badge.textContent = activeMeta.badge;
+    if (title) title.textContent = activeMeta.title;
+    if (description) description.textContent = activeMeta.description;
+    if (counter) {
+      counter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+    }
+
+    cards.forEach((card, index) => {
+      const offset = getShortestOffset(index);
+      const abs = Math.abs(offset);
+      const scale = offset === 0 ? 1 : abs === 1 ? 0.86 : abs === 2 ? 0.72 : 0.62;
+      const opacity = offset === 0 ? 1 : abs === 1 ? 0.58 : abs === 2 ? 0.18 : 0;
+      const blur = offset === 0 ? '0px' : abs === 1 ? '1.5px' : abs === 2 ? '5px' : '8px';
+      const brightness = offset === 0 ? '1' : abs === 1 ? '0.7' : abs === 2 ? '0.42' : '0.28';
+      const isVisible = abs <= 2;
+
+      card.classList.toggle('is-active', offset === 0);
+      card.classList.toggle('is-hidden', !isVisible);
+      card.style.setProperty('--offset', String(offset));
+      card.style.setProperty('--abs', String(Math.min(abs, 3)));
+      card.style.setProperty('--scale', String(scale));
+      card.style.setProperty('--opacity', String(opacity));
+      card.style.setProperty('--blur', blur);
+      card.style.setProperty('--brightness', brightness);
+      card.style.zIndex = String(offset === 0 ? 50 : 40 - abs);
+      card.setAttribute('aria-hidden', offset === 0 ? 'false' : 'true');
+    });
+
+    dotsContainer.querySelectorAll('.cert-focus-dot').forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+      dot.setAttribute('aria-current', index === currentIndex ? 'true' : 'false');
+    });
+  };
+
+  cards.forEach((card, index) => {
+    card.addEventListener('click', () => {
+      const offset = getShortestOffset(index);
+      if (offset === 0) {
+        openModal(card);
+        return;
+      }
+      goTo(currentIndex + offset);
+    });
+  });
+
+  cards.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'cert-focus-dot';
+    dot.setAttribute('aria-label', `Go to certification ${index + 1}`);
+    dot.addEventListener('click', () => {
+      goTo(index);
+    });
+    dotsContainer.appendChild(dot);
+  });
+
+  prevBtn.addEventListener('click', () => {
+    goTo(currentIndex - 1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    goTo(currentIndex + 1);
+  });
+
+  if (expandBtn) {
+    expandBtn.addEventListener('click', () => {
+      openModal(cards[currentIndex]);
+    });
+  }
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeModal);
+  }
+
+  if (modal) {
+    modal.querySelectorAll('[data-close-certifications-modal]').forEach((element) => {
+      element.addEventListener('click', closeModal);
+    });
+  }
+
+  rail.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      goTo(currentIndex - 1);
+    }
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      goTo(currentIndex + 1);
+    }
+  });
+
+  rail.addEventListener('wheel', (event) => {
+    const now = Date.now();
+    if (now - lastWheelTime < 400) return;
+
+    const isHorizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY);
+    if (!isHorizontal || Math.abs(event.deltaX) < 20) return;
+
+    event.preventDefault();
+    if (event.deltaX > 0) {
+      goTo(currentIndex + 1);
+    } else {
+      goTo(currentIndex - 1);
+    }
+
+    lastWheelTime = now;
+  }, { passive: false });
+
+  rail.addEventListener('touchstart', (event) => {
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }, { passive: true });
+
+  rail.addEventListener('touchend', (event) => {
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+
+    if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX < 0) {
+        goTo(currentIndex + 1);
+      } else {
+        goTo(currentIndex - 1);
+      }
+    }
+  }, { passive: true });
+
+  updateRail();
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal?.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+})();
+
 // ===== SCHEDULE A MEETING MODAL =====
 ;(function () {
   const modal = document.getElementById('meeting-modal');
