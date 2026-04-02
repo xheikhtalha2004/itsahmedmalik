@@ -5,6 +5,48 @@
 // ===== MOBILE NAV MENU TOGGLE =====
 ;(function () {
   document.addEventListener('DOMContentLoaded', () => {
+    const insertEventsLinks = () => {
+      const navLeft = document.querySelector('.nav-links-left');
+      if (navLeft && !navLeft.querySelector('a[href="events.html"]')) {
+        const divider = document.createElement('span');
+        divider.className = 'nav-divider';
+        divider.textContent = '/';
+
+        const link = document.createElement('a');
+        link.href = 'events.html';
+        link.className = 'nav-link';
+        link.textContent = 'Events';
+
+        navLeft.appendChild(divider);
+        navLeft.appendChild(link);
+      }
+
+      const mobileMenu = document.getElementById('nav-mobile-menu');
+      const mobileWorkLink = mobileMenu?.querySelector('a[href="work.html"]');
+      if (mobileMenu && mobileWorkLink && !mobileMenu.querySelector('a[href="events.html"]')) {
+        const link = document.createElement('a');
+        link.href = 'events.html';
+        link.className = 'nav-mobile-link';
+        link.textContent = 'Events';
+        mobileWorkLink.insertAdjacentElement('afterend', link);
+      }
+
+      const footerFeatures = Array.from(document.querySelectorAll('.footer-col')).find((column) => {
+        return column.querySelector('.footer-col-title')?.textContent?.trim() === 'Features';
+      });
+      const footerWorkLink = footerFeatures?.querySelector('a[href="work.html"]');
+
+      if (footerFeatures && footerWorkLink && !footerFeatures.querySelector('a[href="events.html"]')) {
+        const link = document.createElement('a');
+        link.href = 'events.html';
+        link.className = 'footer-link';
+        link.textContent = 'Events';
+        footerWorkLink.insertAdjacentElement('afterend', link);
+      }
+    };
+
+    insertEventsLinks();
+
     const hamburger = document.getElementById('nav-hamburger');
     const mobileMenu = document.getElementById('nav-mobile-menu');
     const mobileLinks = document.querySelectorAll('.nav-mobile-link');
@@ -98,7 +140,7 @@ function toggleFaq(id) {
 // ===== SCROLL ANIMATIONS (Intersection Observer) =====
 ;(function () {
   const elements = document.querySelectorAll(
-    '.service-row, .project-card, .exp-card, .testimonial-card, .blog-card, .blog-feature-card, .blog-archive-card, .value-item, .faq-item, .dashboard-panel, .dashboard-projects-panel, .dashboard-project-slide'
+    '.service-row, .project-card, .exp-card, .testimonial-card, .blog-card, .blog-feature-card, .blog-archive-card, .value-item, .faq-item, .dashboard-panel, .dashboard-projects-panel, .dashboard-project-slide, .events-intro-shell, .events-collection-card'
   );
 
   elements.forEach((el, i) => {

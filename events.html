@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events | Ahmed Malik</title>
+  <meta
+    name="description"
+    content="A curated events archive from Ahmed Malik featuring conference visits, startup forums, university sessions, and community highlights."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header id="header">
+    <nav class="nav-container">
+      <div class="nav-links-left">
+        <a href="index.html" class="nav-link">Home</a>
+        <span class="nav-divider">/</span>
+        <a href="about.html" class="nav-link">About</a>
+        <span class="nav-divider">/</span>
+        <a href="work.html" class="nav-link">Work</a>
+      </div>
+      <a href="index.html" class="nav-logo">
+        <img src="images/gradient_logo.svg" alt="Ahmed Malik Logo" class="nav-logo-img" />
+      </a>
+      <div class="nav-links-right">
+        <a href="certifications.html" class="nav-link">Certifications</a>
+        <span class="nav-divider">/</span>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <span class="nav-divider">/</span>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="nav-border"></div>
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="index.html" class="nav-mobile-link" id="mobile-link">Home</a>
+      <a href="about.html" class="nav-mobile-link" id="mobile-link">About</a>
+      <a href="work.html" class="nav-mobile-link" id="mobile-link">Work</a>
+      <a href="certifications.html" class="nav-mobile-link">Certifications</a>
+      <a href="blog.html" class="nav-mobile-link" id="mobile-link">Blog</a>
+      <a href="contact.html" class="nav-mobile-link" id="mobile-link">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="contact-hero cert-hero events-hero">
+      <h1 class="cert-hero-title">Event Gallery</h1>
+      <p class="cert-hero-subtitle">
+        A visual archive of university visits, startup forums, AI meetups, and team moments. Each thumbnail opens into its own fullscreen gallery using the images inside that event folder.
+      </p>
+    </section>
+
+    <section class="events-grid-section">
+      <div class="events-grid-shell">
+        <div class="events-grid-header">
+          <div>
+            <h2 class="events-grid-title">Event Gallery</h2>
+            <p class="events-grid-subtitle">One featured thumbnail from each event folder. Click any event to open the fullscreen gallery.</p>
+          </div>
+        </div>
+
+        <div class="events-collections-grid" id="events-collections-grid" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="events-lightbox" id="events-lightbox" hidden aria-hidden="true">
+    <div class="events-lightbox-backdrop" data-events-close></div>
+    <section class="events-lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="events-lightbox-title">
+      <button type="button" class="events-lightbox-close" data-events-close aria-label="Close event gallery">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+      <div class="events-lightbox-header">
+        <div class="events-lightbox-copy">
+          <h2 class="events-lightbox-title" id="events-lightbox-title"></h2>
+          <p class="events-lightbox-caption" id="events-lightbox-caption"></p>
+        </div>
+        <div class="events-lightbox-meta" id="events-lightbox-counter"></div>
+      </div>
+
+      <div class="events-lightbox-stage" id="events-lightbox-stage">
+        <button type="button" class="events-stage-btn events-stage-btn-prev" id="events-lightbox-prev" aria-label="Show previous image">
+          <span aria-hidden="true">&#8592;</span>
+        </button>
+        <div class="events-stage-frame">
+          <img class="events-stage-image" id="events-lightbox-image" alt="" />
+        </div>
+        <button type="button" class="events-stage-btn events-stage-btn-next" id="events-lightbox-next" aria-label="Show next image">
+          <span aria-hidden="true">&#8594;</span>
+        </button>
+      </div>
+
+      <div class="events-thumbnail-strip" id="events-lightbox-thumbnails" aria-label="Gallery thumbnails"></div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/gradient_logo.svg" alt="Ahmed Malik Logo" class="footer-logo-img" style="height:40px; margin-bottom:1rem;" />
+        <p class="footer-tagline">Get weekly news on itsahmedmalik.com</p>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Enter your email" class="newsletter-input" />
+          <button type="submit" class="newsletter-btn">Let me know</button>
+        </form>
+        <div style="margin-top: 2rem;">
+          <a href="contact.html" class="newsletter-btn" style="text-decoration:none; display:inline-block; font-family:var(--font-mono);">Contact Now &#8594;</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <p class="footer-col-title">Features</p>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="work.html" class="footer-link">Work</a>
+          <a href="certifications.html" class="footer-link">Certifications</a>
+          <a href="blog.html" class="footer-link">Blog</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Company</p>
+          <a href="https://tamxai.com" target="_blank" rel="noopener noreferrer" class="footer-link">TAMx</a>
+          <a href="#" class="footer-link">QuickSilver</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-wordmark">AHMED MALIK</div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">2026 &copy; Ahmed Malik Copyright</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="events.js"></script>
+</body>
+</html>

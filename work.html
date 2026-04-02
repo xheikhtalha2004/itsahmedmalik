@@ -215,34 +215,53 @@
 
             <article class="dashboard-panel dashboard-performance-panel">
               <div class="dashboard-panel-header">
-                <h3 class="dashboard-panel-title">Performance</h3>
+                <div>
+                  <h3 class="dashboard-panel-title">Global Coverage</h3>
+                  <p class="dashboard-panel-subtitle">Interactive live view of active project hubs and delivery lanes.</p>
+                </div>
+                <span class="dashboard-chip">Live</span>
               </div>
 
-              <div class="dashboard-uptime-card">
-                <div class="dashboard-ring" style="--progress: 99.4%;">
-                  <div class="dashboard-ring-inner">
-                    <span>Up Time</span>
-                    <strong>99.4%</strong>
+              <div class="dashboard-globe-card">
+                <div class="dashboard-globe-frame">
+                  <canvas
+                    class="dashboard-globe-canvas"
+                    data-dashboard-globe
+                    aria-label="Interactive globe showing active project hubs"
+                  ></canvas>
+                  <div class="dashboard-globe-glow" aria-hidden="true"></div>
+                  <div class="dashboard-globe-orbit dashboard-globe-orbit-one" aria-hidden="true"></div>
+                  <div class="dashboard-globe-orbit dashboard-globe-orbit-two" aria-hidden="true"></div>
+                </div>
+
+                <div class="dashboard-globe-insights">
+                  <div class="dashboard-globe-stat">
+                    <span>Coverage Nodes</span>
+                    <strong>04</strong>
+                  </div>
+                  <div class="dashboard-globe-stat">
+                    <span>Live Sync</span>
+                    <strong>24/7</strong>
                   </div>
                 </div>
               </div>
 
-              <div class="dashboard-mini-stat-grid">
+              <div class="dashboard-mini-stat-grid dashboard-mini-stat-grid-compact">
                 <div class="dashboard-mini-stat">
-                  <span>Response Time</span>
-                  <strong>1.8s</strong>
+                  <span>Primary Hub</span>
+                  <strong>Pakistan</strong>
                 </div>
                 <div class="dashboard-mini-stat">
-                  <span>Deadlines This Week</span>
-                  <strong>05</strong>
+                  <span>Partner Teams</span>
+                  <strong>UK / US / APAC</strong>
                 </div>
                 <div class="dashboard-mini-stat">
-                  <span>Team Utilization</span>
-                  <strong>84%</strong>
+                  <span>Active Handoffs</span>
+                  <strong>11</strong>
                 </div>
                 <div class="dashboard-mini-stat">
-                  <span>Stakeholder NPS</span>
-                  <strong>72</strong>
+                  <span>Risk Alerts</span>
+                  <strong>02</strong>
                 </div>
               </div>
             </article>
@@ -612,6 +631,7 @@
   </footer>
 
   <script src="script.js"></script>
+  <script type="module" src="dashboard-globe.js"></script>
 </body>
 </html>
 
