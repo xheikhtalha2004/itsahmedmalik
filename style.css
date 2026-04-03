@@ -310,6 +310,34 @@ h1, h2, h3 {
   color: var(--text-primary);
 }
 
+.hero-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.35rem;
+}
+
+.hero-social-link {
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.02);
+  transition: color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), background var(--transition-fast);
+}
+
+.hero-social-link:hover {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
 .intro-video-section {
   position: relative;
   padding: clamp(4rem, 8vw, 7rem) 2rem;
@@ -2528,7 +2556,8 @@ h1, h2, h3 {
   -webkit-text-stroke: 1px var(--text-secondary);
   white-space: nowrap;
   margin-top: -10vh; /* Lift heading slightly */
-  padding-left: 5vw;
+  width: 100%;
+  padding-left: 0;
   margin-bottom: 2rem;
   font-family: 'Chivo Mono', monospace;
   font-weight: 900;
