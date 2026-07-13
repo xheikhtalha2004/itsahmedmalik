@@ -5,92 +5,9 @@
 // ===== MOBILE NAV MENU TOGGLE =====
 ;(function () {
   document.addEventListener('DOMContentLoaded', () => {
-    const insertEventsLinks = () => {
-      const navLeft = document.querySelector('.nav-links-left');
-      if (navLeft && !navLeft.querySelector('a[href="events.html"]')) {
-        const divider = document.createElement('span');
-        divider.className = 'nav-divider';
-        divider.textContent = '/';
-
-        const link = document.createElement('a');
-        link.href = 'events.html';
-        link.className = 'nav-link';
-        link.textContent = 'Events';
-
-        navLeft.appendChild(divider);
-        navLeft.appendChild(link);
-      }
-
-      const mobileMenu = document.getElementById('nav-mobile-menu');
-      const mobileWorkLink = mobileMenu?.querySelector('a[href="work.html"]');
-      if (mobileMenu && mobileWorkLink && !mobileMenu.querySelector('a[href="events.html"]')) {
-        const link = document.createElement('a');
-        link.href = 'events.html';
-        link.className = 'nav-mobile-link';
-        link.textContent = 'Events';
-        mobileWorkLink.insertAdjacentElement('afterend', link);
-      }
-
-      const footerFeatures = Array.from(document.querySelectorAll('.footer-col')).find((column) => {
-        return column.querySelector('.footer-col-title')?.textContent?.trim() === 'Features';
-      });
-      const footerWorkLink = footerFeatures?.querySelector('a[href="work.html"]');
-
-      if (footerFeatures && footerWorkLink && !footerFeatures.querySelector('a[href="events.html"]')) {
-        const link = document.createElement('a');
-        link.href = 'events.html';
-        link.className = 'footer-link';
-        link.textContent = 'Events';
-        footerWorkLink.insertAdjacentElement('afterend', link);
-      }
-    };
-
-    insertEventsLinks();
-
     const hamburger = document.getElementById('nav-hamburger');
     const mobileMenu = document.getElementById('nav-mobile-menu');
     const mobileLinks = document.querySelectorAll('.nav-mobile-link');
-    
-    if (hamburger && mobileMenu) {
-      hamburger.addEventListener('click', () => {
-        mobileMenu.classList.toggle('active');
-        const isExpanded = mobileMenu.classList.contains('active');
-        hamburger.setAttribute('aria-expanded', isExpanded);
-        
-        // Optional: animate hamburger lines to form X
-        const spans = hamburger.querySelectorAll('span');
-        if (spans.length === 3) {
-          if (isExpanded) {
-            spans[0].style.transform = 'translateY(7px) rotate(45deg)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
-          } else {
-            spans[0].style.transform = 'translateY(0) rotate(0)';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'translateY(0) rotate(0)';
-          }
-        }
-      });
-      
-      // Close menu when a link is clicked
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.remove('active');
-          hamburger.setAttribute('aria-expanded', 'false');
-          
-          const spans = hamburger.querySelectorAll('span');
-          if (spans.length === 3) {
-            spans[0].style.transform = 'translateY(0) rotate(0)';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'translateY(0) rotate(0)';
-          }
-        });
-      });
-    }
-  });
-})();
-
-// ===== HEADER HIDE/SHOW ON SCROLL =====
 ;(function () {
   const header = document.getElementById('header');
   let lastScroll = 0;
@@ -292,14 +209,7 @@ function toggleFaq(id) {
   loadYouTubeApi();
 })();
 
-// ===== TESTIMONIALS INFINITE MARQUEE (row 1 scrolls left, row 2 right) =====
-;(function () {
-  const grid = document.querySelector('.testimonials-grid');
-  if (!grid) return;
 
-  // We'll just let the static grid display — marquee is a bonus enhancement
-  // For now, the grid is properly displayed
-})();
 
 // ===== DASHBOARD PROJECT CAROUSEL =====
 ;(function () {
@@ -427,12 +337,12 @@ function toggleFaq(id) {
     e.preventDefault();
     const input = form.querySelector('.newsletter-input');
     const btn = form.querySelector('.newsletter-btn');
-    
-    if (input.value && input.value.includes('@')) {
+
+    if (form.checkValidity() && input.value) {
       btn.textContent = 'Noted!';
       btn.style.background = '#0ACF83';
       input.value = '';
-      
+
       setTimeout(() => {
         btn.textContent = 'Let me know';
         btn.style.background = '';
@@ -493,6 +403,29 @@ function toggleFaq(id) {
 ;(function () {
   const rail = document.getElementById('certifications-rail');
   const track = document.getElementById('certifications-track');
+
+  // Render cert cards from PORTFOLIO_DATA — admin-panel ready.
+  // To add certifications without code: update window.PORTFOLIO_DATA.certifications
+  // (or later: fetch from /api/certifications and set it before this script runs).
+  const certData = (window.PORTFOLIO_DATA || {}).certifications || [];
+  if (certData.length && track) {
+    track.innerHTML = '';
+    certData.forEach((cert) => {
+      const article = document.createElement('article');
+      article.className = 'cert-focus-card';
+      article.dataset.certBadge = cert.badge;
+      article.dataset.certTitle = cert.title;
+      article.dataset.certDesc = cert.description;
+      article.dataset.certImage = cert.image;
+      article.dataset.certImageAlt = cert.imageAlt || '';
+      const img = document.createElement('img');
+      img.src = cert.image;
+      img.alt = cert.imageAlt || cert.title;
+      img.className = 'cert-focus-card-image';
+      article.appendChild(img);
+      track.appendChild(article);
+    });
+  }
   const prevBtn = document.getElementById('certifications-prev');
   const nextBtn = document.getElementById('certifications-next');
   const dotsContainer = document.getElementById('certifications-dots');
@@ -537,16 +470,12 @@ function toggleFaq(id) {
 
   const getCardMeta = (card) => {
     if (!card) return null;
-
-    const image = card.dataset.certImage || card.querySelector('img')?.getAttribute('src') || '';
-    const alt = card.querySelector('img')?.getAttribute('alt') || '';
-
     return {
       badge: card.dataset.certBadge || '',
       title: card.dataset.certTitle || '',
       description: card.dataset.certDesc || '',
-      image,
-      alt
+      image: card.dataset.certImage || '',
+      alt: card.dataset.certImageAlt || '',
     };
   };
 
@@ -884,9 +813,7 @@ function toggleFaq(id) {
     document.body.style.overflow = '';
   };
 
-  openBtn.addEventListener('click', () => {
-    openModal();
-  });
+  openBtn.addEventListener('click', openModal);
 
   closeBtn.addEventListener('click', closeModal);
   modal.querySelectorAll('[data-close-meeting-modal]').forEach((element) => {

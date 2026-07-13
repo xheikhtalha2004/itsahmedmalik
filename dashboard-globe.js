@@ -122,16 +122,16 @@ async function mountDashboardGlobe() {
     canvas.addEventListener("pointerdown", handlePointerDown);
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
     window.addEventListener("pointerup", handlePointerUp, { passive: true });
-    window.addEventListener("resize", handleResize, { passive: true });
     resizeObserver.observe(canvas);
+
     initGlobe();
 
     const cleanup = () => {
       canvas.removeEventListener("pointerdown", handlePointerDown);
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("pointerup", handlePointerUp);
-      window.removeEventListener("resize", handleResize);
       resizeObserver.disconnect();
+
 
       if (animationFrameId) {
         window.cancelAnimationFrame(animationFrameId);

@@ -21,6 +21,7 @@ new_footer = """  <!-- Footer -->
           <p class="footer-col-title">Features</p>
           <a href="about.html" class="footer-link">About</a>
           <a href="work.html" class="footer-link">Work</a>
+          <a href="events.html" class="footer-link">Events</a>
           <a href="certifications.html" class="footer-link">Certifications</a>
           <a href="blog.html" class="footer-link">Blog</a>
           <a href="contact.html" class="footer-link">Contact</a>
@@ -44,11 +45,10 @@ for file in html_files:
     with open(file, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # Use regex to find and replace the footer block. 
-    # Works for both <footer id="contact" class="footer"> and <footer class="footer">
+    # Replace footer
     content = re.sub(r'<!-- Footer -->\s*<footer.*?</footer>', new_footer, content, flags=re.DOTALL)
 
-    # Update nav links
+    # Normalise href targets
     content = content.replace('href="#contact"', 'href="contact.html"')
     content = content.replace('href="index.html#contact"', 'href="contact.html"')
     content = content.replace('href="#about"', 'href="about.html"')
@@ -56,10 +56,27 @@ for file in html_files:
     content = content.replace('href="index.html#about"', 'href="about.html"')
     content = content.replace('href="index.html#work"', 'href="work.html"')
 
+    # Remove duplicate id="mobile-link" from all nav anchors (finding 5)
+    content = re.sub(r'\s+id="mobile-link"', '', content)
+
+    # Add Events link to desktop nav-links-left (after Work, before closing </div>)
+    # Guard: only insert if not already present
+    if 'href="events.html" class="nav-link"' not in content:
+        content = re.sub(
+            r'(<a href="work\.html" class="nav-link">Work</a>)\s*(</div>)',
+            r'\1\n        <span class="nav-divider">/</span>\n        <a href="events.html" class="nav-link">Events</a>\n      \2',
+            content
+        )
+
+    # Add Events link to mobile menu (after Work mobile link)
+    if 'href="events.html" class="nav-mobile-link"' not in content:
+        content = re.sub(
+            r'(<a href="work\.html" class="nav-mobile-link">Work</a>)',
+            r'\1\n      <a href="events.html" class="nav-mobile-link">Events</a>',
+            content
+        )
+
     with open(file, 'w', encoding='utf-8') as f:
         f.write(content)
 
     print(f"Updated {file}")
-
-
-
