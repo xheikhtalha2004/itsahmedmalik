@@ -4819,3 +4819,10 @@ body.events-gallery-open {
     grid-template-columns: 1fr;
   }
 }
+/* Contact form submission status (added for dynamic backend wiring) */
+.contact-form-status {
+  min-height: 1.2em;
+  font-size: 0.85rem;
+  font-family: var(--font-mono, monospace);
+  margin: -0.5rem 0 0.5rem;
+}

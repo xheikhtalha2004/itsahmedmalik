@@ -830,8 +830,25 @@ function toggleFaq(id) {
     renderCalendar();
   });
 
-  confirmBtn.addEventListener('click', () => {
+  confirmBtn.addEventListener('click', async () => {
     if (!selectedDate || !selectedTime) return;
+
+    // Delegates to assets/js/contact-handler.js which sends the request
+    // to the Supabase Edge Function + Resend email notification.
+    if (typeof window.submitMeetingRequest === 'function') {
+      confirmBtn.disabled = true;
+      confirmBtn.textContent = 'Scheduling…';
+      const ok = await window.submitMeetingRequest(selectedDate, selectedTime);
+      confirmBtn.textContent = 'Schedule a meeting';
+      if (ok) {
+        closeModal();
+      } else {
+        confirmBtn.disabled = false;
+      }
+      return;
+    }
+
+    // Fallback if the handler script failed to load.
     alert(`Your meeting is scheduled for ${selectedDate.toLocaleDateString('en-US', {
       weekday: 'long',
       day: 'numeric',
