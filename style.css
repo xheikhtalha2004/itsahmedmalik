@@ -3,8 +3,6 @@
    Dark, minimalist portfolio design
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;500;600;700;800;900&display=swap');
-
 /* ============== RESET & BASE ============== */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -50,6 +48,39 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2000;
+  padding: 0.7rem 1rem;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-radius: 6px;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-blue-solid);
+  outline-offset: 3px;
 }
 
 img {
@@ -177,6 +208,18 @@ h1, h2, h3 {
   height: 2px;
   background: var(--text-primary);
   transition: transform 0.3s, opacity 0.3s;
+}
+
+.nav-hamburger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-hamburger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .nav-mobile-menu {
@@ -1654,12 +1697,14 @@ h1, h2, h3 {
 
 .newsletter-form {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.75rem;
   max-width: 400px;
 }
 
 .newsletter-input {
   flex: 1;
+  min-width: 0;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 6px;
@@ -4287,7 +4332,7 @@ body.events-gallery-open {
 
 .blog-article-meta {
   color: var(--accent-blue-solid);
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-size: 0.9rem;
   margin-bottom: 1rem;
   display: block;
@@ -4422,7 +4467,7 @@ body.events-gallery-open {
 .contact-info-block h4 {
   font-size: 1.1rem;
   color: var(--text-primary);
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
 }
 
 .contact-form-card {
@@ -4466,7 +4511,7 @@ body.events-gallery-open {
   border-radius: 8px;
   padding: 1rem;
   color: var(--text-secondary);
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
   font-size: 1rem;
   width: 100%;
 }
@@ -4499,7 +4544,7 @@ body.events-gallery-open {
   align-self: flex-start;
   padding: 0.8rem 1.5rem;
   border-radius: 6px;
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -4771,6 +4816,128 @@ body.events-gallery-open {
 
   .meeting-slots-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ============== REAL FORM STATES ============== */
+.honeypot-field {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+.form-status {
+  min-height: 1.5em;
+  margin-top: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.form-status[data-state="success"] {
+  color: #7ee2a8;
+}
+
+.form-status[data-state="error"],
+.field-error {
+  color: #ff9a9a;
+}
+
+.field-error {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+[aria-invalid="true"] {
+  border-color: #e66363 !important;
+}
+
+button[aria-busy="true"],
+button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.turnstile-widget {
+  min-height: 1px;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.meeting-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.meeting-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.meeting-form .contact-input-group.is-wide {
+  grid-column: 1 / -1;
+}
+
+.meeting-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.newsletter-form .form-status {
+  order: 4;
+  flex-basis: 100%;
+  width: 100%;
+  margin-top: 0;
+}
+
+.newsletter-form .turnstile-widget {
+  order: 3;
+  flex: 1 0 100%;
+  width: 100%;
+}
+
+.contact-info-block h4,
+.contact-info-block a,
+.footer-email {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .contact-info-card,
+  .contact-form-card {
+    padding: 1.4rem;
+  }
+
+  .meeting-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .meeting-form-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

@@ -5,91 +5,28 @@
 // ===== MOBILE NAV MENU TOGGLE =====
 ;(function () {
   document.addEventListener('DOMContentLoaded', () => {
-    const insertEventsLinks = () => {
-      const navLeft = document.querySelector('.nav-links-left');
-      if (navLeft && !navLeft.querySelector('a[href="events.html"]')) {
-        const divider = document.createElement('span');
-        divider.className = 'nav-divider';
-        divider.textContent = '/';
-
-        const link = document.createElement('a');
-        link.href = 'events.html';
-        link.className = 'nav-link';
-        link.textContent = 'Events';
-
-        navLeft.appendChild(divider);
-        navLeft.appendChild(link);
-      }
-
-      const mobileMenu = document.getElementById('nav-mobile-menu');
-      const mobileWorkLink = mobileMenu?.querySelector('a[href="work.html"]');
-      if (mobileMenu && mobileWorkLink && !mobileMenu.querySelector('a[href="events.html"]')) {
-        const link = document.createElement('a');
-        link.href = 'events.html';
-        link.className = 'nav-mobile-link';
-        link.textContent = 'Events';
-        mobileWorkLink.insertAdjacentElement('afterend', link);
-      }
-
-      const footerFeatures = Array.from(document.querySelectorAll('.footer-col')).find((column) => {
-        return column.querySelector('.footer-col-title')?.textContent?.trim() === 'Features';
-      });
-      const footerWorkLink = footerFeatures?.querySelector('a[href="work.html"]');
-
-      if (footerFeatures && footerWorkLink && !footerFeatures.querySelector('a[href="events.html"]')) {
-        const link = document.createElement('a');
-        link.href = 'events.html';
-        link.className = 'footer-link';
-        link.textContent = 'Events';
-        footerWorkLink.insertAdjacentElement('afterend', link);
-      }
-    };
-
-    insertEventsLinks();
-
     const hamburger = document.getElementById('nav-hamburger');
     const mobileMenu = document.getElementById('nav-mobile-menu');
     const mobileLinks = document.querySelectorAll('.nav-mobile-link');
+
+    const closeMenu = () => {
+      mobileMenu?.classList.remove('active');
+      hamburger?.classList.remove('is-open');
+      hamburger?.setAttribute('aria-expanded', 'false');
+    };
     
     if (hamburger && mobileMenu) {
       hamburger.addEventListener('click', () => {
         mobileMenu.classList.toggle('active');
         const isExpanded = mobileMenu.classList.contains('active');
+        hamburger.classList.toggle('is-open', isExpanded);
         hamburger.setAttribute('aria-expanded', isExpanded);
-        
-        // Optional: animate hamburger lines to form X
-        const spans = hamburger.querySelectorAll('span');
-        if (spans.length === 3) {
-          if (isExpanded) {
-            spans[0].style.transform = 'translateY(7px) rotate(45deg)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
-          } else {
-            spans[0].style.transform = 'translateY(0) rotate(0)';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'translateY(0) rotate(0)';
-          }
-        }
       });
-      
-      // Close menu when a link is clicked
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.remove('active');
-          hamburger.setAttribute('aria-expanded', 'false');
-          
-          const spans = hamburger.querySelectorAll('span');
-          if (spans.length === 3) {
-            spans[0].style.transform = 'translateY(0) rotate(0)';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'translateY(0) rotate(0)';
-          }
-        });
-      });
+
+      mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
     }
   });
 })();
-
 // ===== HEADER HIDE/SHOW ON SCROLL =====
 ;(function () {
   const header = document.getElementById('header');
@@ -129,11 +66,13 @@ function toggleFaq(id) {
   // Close all first
   document.querySelectorAll('.faq-item.open').forEach(el => {
     el.classList.remove('open');
+    el.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
   });
 
   // Open the clicked one if it wasn't open
   if (!isOpen) {
     item.classList.add('open');
+    item.querySelector('.faq-question')?.setAttribute('aria-expanded', 'true');
   }
 }
 
@@ -164,30 +103,6 @@ function toggleFaq(id) {
   elements.forEach(el => observer.observe(el));
 })();
 
-// ===== PROJECT HOVER GLOW EFFECT =====
-;(function () {
-  const cards = document.querySelectorAll('.project-card');
-  
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = ((y - centerY) / centerY) * -4;
-      const rotateY = ((x - centerX) / centerX) * 4;
-      
-      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(8px)`;
-    });
-    
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
-  });
-})();
-
 // ===== VALUE ITEM ACCORDION (click to expand) =====
 ;(function () {
   const valueItems = document.querySelectorAll('.value-item');
@@ -199,11 +114,25 @@ function toggleFaq(id) {
   }
 
   valueItems.forEach(item => {
-    item.addEventListener('click', () => {
+    item.setAttribute('role', 'button');
+    item.tabIndex = 0;
+    const activate = () => {
       // Remove active from all
-      valueItems.forEach(v => v.classList.remove('active'));
+      valueItems.forEach(v => {
+        v.classList.remove('active');
+        v.setAttribute('aria-expanded', 'false');
+      });
       // Add active to clicked
       item.classList.add('active');
+      item.setAttribute('aria-expanded', 'true');
+    };
+    item.setAttribute('aria-expanded', item.classList.contains('active') ? 'true' : 'false');
+    item.addEventListener('click', activate);
+    item.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        activate();
+      }
     });
   });
 })();
@@ -290,15 +219,6 @@ function toggleFaq(id) {
   };
 
   loadYouTubeApi();
-})();
-
-// ===== TESTIMONIALS INFINITE MARQUEE (row 1 scrolls left, row 2 right) =====
-;(function () {
-  const grid = document.querySelector('.testimonials-grid');
-  if (!grid) return;
-
-  // We'll just let the static grid display — marquee is a bonus enhancement
-  // For now, the grid is properly displayed
 })();
 
 // ===== DASHBOARD PROJECT CAROUSEL =====
@@ -418,29 +338,6 @@ function toggleFaq(id) {
 })();
 
 
-// ===== NEWSLETTER FORM FEEDBACK =====
-;(function () {
-  const form = document.querySelector('.newsletter-form');
-  if (!form) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const input = form.querySelector('.newsletter-input');
-    const btn = form.querySelector('.newsletter-btn');
-    
-    if (input.value && input.value.includes('@')) {
-      btn.textContent = 'Noted!';
-      btn.style.background = '#0ACF83';
-      input.value = '';
-      
-      setTimeout(() => {
-        btn.textContent = 'Let me know';
-        btn.style.background = '';
-      }, 3000);
-    }
-  });
-})();
-
 // ===== TESTIMONIALS SLIDER =====
 ;(function () {
   const track = document.getElementById('testimonials-track');
@@ -517,6 +414,7 @@ function toggleFaq(id) {
   let lastWheelTime = 0;
   let touchStartX = 0;
   let touchStartY = 0;
+  let modalTrigger = null;
 
   const wrapIndex = (value) => (value + cards.length) % cards.length;
 
@@ -564,16 +462,19 @@ function toggleFaq(id) {
     if (modalTitle) modalTitle.textContent = meta.title;
     if (modalBadge) modalBadge.textContent = meta.badge;
 
+    modalTrigger = document.activeElement;
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
+    closeModalBtn?.focus();
   };
 
   const closeModal = () => {
     if (!modal) return;
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
+    modalTrigger?.focus();
   };
 
   const updateRail = () => {
@@ -727,198 +628,19 @@ function toggleFaq(id) {
       closeModal();
     }
   });
-})();
 
-// ===== SCHEDULE A MEETING MODAL =====
-;(function () {
-  const modal = document.getElementById('meeting-modal');
-  const openBtn = document.getElementById('open-meeting-modal');
-  const closeBtn = document.getElementById('close-meeting-modal');
-  const calendarGrid = document.getElementById('meeting-calendar-grid');
-  const monthLabel = document.getElementById('meeting-current-month');
-  const prevMonthBtn = document.getElementById('meeting-prev-month');
-  const nextMonthBtn = document.getElementById('meeting-next-month');
-  const slotsGrid = document.getElementById('meeting-slots-grid');
-  const summary = document.getElementById('meeting-summary');
-  const confirmBtn = document.getElementById('confirm-meeting');
-
-  if (!modal || !openBtn || !closeBtn || !calendarGrid || !monthLabel || !prevMonthBtn || !nextMonthBtn || !slotsGrid || !summary || !confirmBtn) {
-    return;
-  }
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const bookedOffsets = [2, 5, 9, 14, 18];
-  const bookedDates = new Set(
-    bookedOffsets.map((offset) => {
-      const date = new Date(today);
-      date.setDate(today.getDate() + offset);
-      return date.toDateString();
-    })
-  );
-
-  const timeSlots = Array.from({ length: 18 }, (_, index) => {
-    const totalMinutes = 9 * 60 + index * 30;
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-  });
-
-  let currentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  let selectedDate = null;
-  let selectedTime = null;
-
-  const formatSummary = () => {
-    if (!selectedDate || !selectedTime) {
-      summary.textContent = 'Select a date and time for your meeting.';
-      confirmBtn.disabled = true;
-      return;
-    }
-
-    summary.textContent = `Your meeting is scheduled for ${selectedDate.toLocaleDateString('en-US', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long'
-    })} at ${selectedTime}.`;
-    confirmBtn.disabled = false;
-  };
-
-  const renderSlots = () => {
-    slotsGrid.innerHTML = '';
-
-    if (!selectedDate) {
-      const empty = document.createElement('p');
-      empty.className = 'meeting-summary';
-      empty.textContent = 'Choose a date to see available meeting times.';
-      slotsGrid.appendChild(empty);
-      formatSummary();
-      return;
-    }
-
-    timeSlots.forEach((time) => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'meeting-slot';
-      button.textContent = time;
-
-      if (selectedTime === time) {
-        button.classList.add('is-selected');
-      }
-
-      button.addEventListener('click', () => {
-        selectedTime = time;
-        renderSlots();
-        formatSummary();
-      });
-
-      slotsGrid.appendChild(button);
-    });
-
-    formatSummary();
-  };
-
-  const renderCalendar = () => {
-    calendarGrid.innerHTML = '';
-    monthLabel.textContent = currentMonth.toLocaleDateString('en-US', {
-      month: 'long',
-      year: 'numeric'
-    });
-
-    const year = currentMonth.getFullYear();
-    const month = currentMonth.getMonth();
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const firstWeekday = firstDay.getDay();
-    const totalCells = Math.ceil((firstWeekday + lastDay.getDate()) / 7) * 7;
-
-    for (let index = 0; index < totalCells; index += 1) {
-      const dayNumber = index - firstWeekday + 1;
-      const cellDate = new Date(year, month, dayNumber);
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'meeting-day';
-      button.textContent = String(cellDate.getDate());
-
-      const isCurrentMonth = cellDate.getMonth() === month;
-      const isPast = cellDate < today;
-      const isWeekend = cellDate.getDay() === 0 || cellDate.getDay() === 6;
-      const isBooked = bookedDates.has(cellDate.toDateString());
-      const isDisabled = !isCurrentMonth || isPast || isWeekend || isBooked;
-
-      if (!isCurrentMonth) {
-        button.classList.add('is-muted');
-      }
-
-      if (isDisabled) {
-        button.classList.add('is-disabled');
-        button.disabled = true;
-      }
-
-      if (selectedDate && cellDate.toDateString() === selectedDate.toDateString()) {
-        button.classList.add('is-selected');
-      }
-
-      if (!isDisabled && isCurrentMonth) {
-        button.addEventListener('click', () => {
-          selectedDate = new Date(cellDate);
-          selectedTime = null;
-          renderCalendar();
-          renderSlots();
-        });
-      }
-
-      calendarGrid.appendChild(button);
-    }
-  };
-
-  const openModal = () => {
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeModal = () => {
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
-
-  openBtn.addEventListener('click', () => {
-    openModal();
-  });
-
-  closeBtn.addEventListener('click', closeModal);
-  modal.querySelectorAll('[data-close-meeting-modal]').forEach((element) => {
-    element.addEventListener('click', closeModal);
-  });
-
-  prevMonthBtn.addEventListener('click', () => {
-    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
-    renderCalendar();
-  });
-
-  nextMonthBtn.addEventListener('click', () => {
-    currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
-    renderCalendar();
-  });
-
-  confirmBtn.addEventListener('click', () => {
-    if (!selectedDate || !selectedTime) return;
-    alert(`Your meeting is scheduled for ${selectedDate.toLocaleDateString('en-US', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long'
-    })} at ${selectedTime}.`);
-    closeModal();
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && modal.classList.contains('is-open')) {
-      closeModal();
+  modal?.addEventListener('keydown', (event) => {
+    if (event.key !== 'Tab') return;
+    const focusable = Array.from(modal.querySelectorAll('button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'));
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
     }
   });
-
-  renderCalendar();
-  renderSlots();
 })();

@@ -16,7 +16,8 @@ async function mountDashboardGlobe() {
   if (!(canvas instanceof HTMLCanvasElement)) return;
 
   try {
-    const { default: createGlobe } = await import("https://esm.sh/cobe?bundle");
+    const { default: createGlobe } = await import("https://esm.sh/cobe@2.0.1?bundle");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const pointerState = { x: 0, y: 0, active: false };
     const dragOffset = { phi: 0, theta: 0 };
     let phiOffset = 0;
@@ -25,6 +26,7 @@ async function mountDashboardGlobe() {
     let phi = 0;
     let globe = null;
     let animationFrameId = 0;
+    let renderGlobe = () => {};
 
     const getSize = () => Math.max(canvas.offsetWidth, 1);
 
@@ -41,6 +43,7 @@ async function mountDashboardGlobe() {
 
       dragOffset.phi = (event.clientX - pointerState.x) / 300;
       dragOffset.theta = (event.clientY - pointerState.y) / 1000;
+      if (prefersReducedMotion) renderGlobe();
     };
 
     const handlePointerUp = () => {
@@ -54,6 +57,7 @@ async function mountDashboardGlobe() {
       dragOffset.theta = 0;
       isPaused = false;
       canvas.style.cursor = "grab";
+      if (prefersReducedMotion) renderGlobe();
     };
 
     const handleResize = () => {
@@ -93,20 +97,25 @@ async function mountDashboardGlobe() {
         opacity: 0.7,
       });
 
+      renderGlobe = () => {
+        globe.update({
+          phi: phi + phiOffset + dragOffset.phi,
+          theta: 0.24 + thetaOffset + dragOffset.theta,
+        });
+      };
+
       const animate = () => {
         if (!isPaused) {
           phi += 0.004;
         }
 
-        globe.update({
-          phi: phi + phiOffset + dragOffset.phi,
-          theta: 0.24 + thetaOffset + dragOffset.theta,
-        });
+        renderGlobe();
 
         animationFrameId = window.requestAnimationFrame(animate);
       };
 
-      animate();
+      if (prefersReducedMotion) renderGlobe();
+      else animate();
       canvas.classList.add("is-ready");
     };
 

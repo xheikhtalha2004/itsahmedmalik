@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Contact Ahmed Malik | Software, AI & Startup Advisory</title>
+    <meta name="description" content="Contact Ahmed Malik for software development, AI consulting, product strategy, startup advisory, or partnership opportunities." />
+  <meta name="author" content="Ahmed Malik" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="canonical" href="https://itsahmedmalik.com/contact.html" />
+<meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Ahmed Malik" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contact Ahmed Malik | Software, AI & Startup Advisory" />
+  <meta property="og:description" content="Contact Ahmed Malik for software development, AI consulting, product strategy, startup advisory, or partnership opportunities." />
+  <meta property="og:url" content="https://itsahmedmalik.com/contact.html" />
+  <meta property="og:image" content="https://itsahmedmalik.com/images/why_choose_me.png" />
+  <meta property="og:image:alt" content="Contact Ahmed Malik" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact Ahmed Malik | Software, AI & Startup Advisory" />
+  <meta name="twitter:description" content="Contact Ahmed Malik for software development, AI consulting, product strategy, startup advisory, or partnership opportunities." />
+  <meta name="twitter:image" content="https://itsahmedmalik.com/images/why_choose_me.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <header id="header">
+    <nav class="nav-container">
+      <div class="nav-links-left">
+        <a href="index.html#hero" class="nav-link">Home</a>
+        <span class="nav-divider">/</span>
+        <a href="about.html" class="nav-link">About</a>
+        <span class="nav-divider">/</span>
+        <a href="work.html" class="nav-link">Work</a>
+      </div>
+      <a href="index.html#hero" class="nav-logo">
+        <img src="images/gradient_logo.svg" alt="Ahmed Malik Logo" class="nav-logo-img" />
+      </a>
+      <div class="nav-links-right">
+        <a href="certifications.html" class="nav-link">Certifications</a>
+        <span class="nav-divider">/</span>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <span class="nav-divider">/</span>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="nav-border"></div>
+    <!-- Mobile menu -->
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="index.html#hero" class="nav-mobile-link">Home</a>
+      <a href="about.html" class="nav-mobile-link">About</a>
+      <a href="work.html" class="nav-mobile-link">Work</a>
+      <a href="certifications.html" class="nav-mobile-link">Certifications</a>
+      <a href="blog.html" class="nav-mobile-link">Blog</a>
+      <a href="contact.html" class="nav-mobile-link">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="contact-hero cert-hero">
+      <h1 class="cert-hero-title">Get in Touch</h1>
+      <p class="cert-hero-subtitle">Let's discuss how we can work together to build something extraordinary.</p>
+    </section>
+
+    <section class="contact-container">
+      <!-- Left Info -->
+      <div class="contact-info-card">
+        <div class="contact-info-block">
+          <h3>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            Reach Me via Email
+          </h3>
+          <p>I'll get back to you as soon as possible to explore how we can work together.</p>
+          <h4>hello@itsahmedmalik.com</h4>
+          <h4 style="margin-top: 0.5rem;">ahmedhabdulla0@gmail.com</h4>
+        </div>
+        
+        <div class="contact-info-block">
+          <h3>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            Mobile Number
+          </h3>
+          <p>Whether it's a quick question, a collaboration opportunity, or a design consultation.</p>
+          <h4>+92 315 5320243</h4>
+        </div>
+        
+        <div class="contact-info-block">
+          <h3>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Location
+          </h3>
+          <p>If you'd like to connect, ask questions, or start a new project, feel free to reach out.</p>
+          <h4>Islamabad, Pakistan</h4>
+        </div>
+
+        <!-- Socials & CV Download -->
+        <div class="contact-info-block" style="margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+          <div style="display: flex; gap: 1.5rem; margin-bottom: 2rem;">
+            <a href="https://www.facebook.com/share/1Qhjua7uVT/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); transition: color 0.3s ease;" title="Facebook">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/ahmedmalik.co?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); transition: color 0.3s ease;" title="Instagram">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/ahmed-malik-9b818a2b4/" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); transition: color 0.3s ease;" title="LinkedIn">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+          </div>
+          <a href="my_cv.pdf" download class="contact-submit-btn" style="background: transparent; border: 1px solid var(--text-primary); color: var(--text-primary); margin-top: 0; align-items: center; justify-content: center; width: 100%;">
+            Download CV
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 0.5rem;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Form -->
+      <form class="contact-form-card" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+        <h2 class="contact-form-title">Tell us a bit about yourself</h2>
+        
+        <div class="contact-form-row">
+          <div class="contact-input-group" style="grid-column: span 2;">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" class="contact-input" placeholder="Jackson Ethan" required />
+          </div>
+        </div>
+
+        <div class="contact-form-row">
+          <div class="contact-input-group">
+            <label for="emailAddr">Email Address</label>
+            <input type="email" id="emailAddr" class="contact-input" placeholder="Type your mail address" required />
+          </div>
+          <div class="contact-input-group">
+            <label for="phoneNum">Phone</label>
+            <input type="tel" id="phoneNum" class="contact-input" placeholder="+92" />
+          </div>
+        </div>
+
+        <div class="contact-input-group">
+          <label for="serviceReq">Required Service</label>
+          <select id="serviceReq" class="contact-select" required>
+            <option value="" disabled selected>Select your required services</option>
+            <option value="software">Software Development</option>
+            <option value="ai">AI Consulting / Integration</option>
+            <option value="startup">Startup Advisory</option>
+            <option value="other">Other Inquiry</option>
+          </select>
+        </div>
+
+        <div class="contact-input-group">
+          <label for="messageText">Messages</label>
+          <textarea id="messageText" class="contact-textarea" placeholder="Type a message" required></textarea>
+        </div>
+
+        <div class="contact-form-actions">
+          <button type="submit" class="contact-submit-btn">
+            Contact Now
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+          <button type="button" class="contact-submit-btn contact-secondary-btn" id="open-meeting-modal">
+            Schedule a meeting
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <div class="meeting-modal" id="meeting-modal" aria-hidden="true">
+    <div class="meeting-modal-backdrop" data-close-meeting-modal></div>
+    <div class="meeting-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="meeting-modal-title">
+      <button type="button" class="meeting-modal-close" id="close-meeting-modal" aria-label="Close schedule a meeting dialog">&times;</button>
+      <div class="meeting-modal-header">
+        <p class="meeting-modal-eyebrow">Schedule a meeting</p>
+        <h2 class="meeting-modal-title" id="meeting-modal-title">Choose a date and time</h2>
+        <p class="meeting-modal-subtitle">Pick an available day and slot for your meeting. Unavailable days are disabled.</p>
+      </div>
+      <div class="meeting-scheduler">
+        <div class="meeting-calendar-panel">
+          <div class="meeting-calendar-header">
+            <button type="button" class="meeting-calendar-nav" id="meeting-prev-month" aria-label="Previous month">&#8249;</button>
+            <h3 class="meeting-calendar-month" id="meeting-current-month">Month</h3>
+            <button type="button" class="meeting-calendar-nav" id="meeting-next-month" aria-label="Next month">&#8250;</button>
+          </div>
+          <div class="meeting-weekdays">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+          </div>
+          <div class="meeting-calendar-grid" id="meeting-calendar-grid"></div>
+        </div>
+        <div class="meeting-slots-panel">
+          <h3 class="meeting-slots-title">Available slots</h3>
+          <div class="meeting-slots-grid" id="meeting-slots-grid"></div>
+        </div>
+      </div>
+      <div class="meeting-modal-footer">
+        <p class="meeting-summary" id="meeting-summary">Select a date and time for your meeting.</p>
+        <button type="button" class="contact-submit-btn meeting-confirm-btn" id="confirm-meeting" disabled>Schedule a meeting</button>
+      </div>
+    </div>
+  </div>
+
+      <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/gradient_logo.svg" alt="Ahmed Malik Logo" class="footer-logo-img" style="height:40px; margin-bottom:1rem;" />
+        <p class="footer-tagline">Get weekly news on itsahmedmalik.com</p>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Enter your email" class="newsletter-input" />
+          <button type="submit" class="newsletter-btn">Let me know</button>
+        </form>
+        <div style="margin-top: 2rem;">
+          <a href="contact.html" class="newsletter-btn" style="text-decoration:none; display:inline-block; font-family:var(--font-main);">Contact Now &#8594;</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <p class="footer-col-title">Features</p>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="work.html" class="footer-link">Work</a>
+          <a href="certifications.html" class="footer-link">Certifications</a>
+          <a href="blog.html" class="footer-link">Blog</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Company</p>
+          <a href="https://tamxai.com" target="_blank" rel="noopener noreferrer" class="footer-link">TAMx</a>
+          <a href="#" class="footer-link">QuickSilver</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-wordmark">AHMED MALIK</div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">2026 &copy; Ahmed Malik Copyright</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+

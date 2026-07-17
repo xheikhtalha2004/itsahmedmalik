@@ -1,0 +1,29 @@
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+
+RewriteEngine On
+
+RewriteRule ^admin$ admin/ [R=301,L]
+
+# Internal application, migration, and dependency files are never public.
+RewriteRule ^(?:\.git|\.agents|components|src|views|db|migrations|tests|tmp|vendor)(?:/|$) - [F,L,NC]
+RewriteRule ^(?:composer\.(?:json|lock)|config(?:\.example)?\.php)$ - [F,L,NC]
+RewriteRule ^(?:skills-lock\.json|generate_blogs\.py|update_global\.py)$ - [F,L,NC]
+
+# These exact browser-compatible routes are always server-rendered.
+RewriteRule ^$ index.php [L,QSA]
+RewriteRule ^index\.html$ index.php [L,QSA]
+RewriteRule ^(?:about|work|contact|blog|certifications|events)\.html$ index.php [L,QSA]
+RewriteRule ^blog-[1-9][0-9]*\.html$ index.php [L,QSA]
+RewriteRule ^sitemap\.xml$ index.php [L,QSA]
+
+# Let Apache serve static images, CSS, JavaScript, fonts, and icons directly.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteRule ^ - [R=404,L]
+
+<FilesMatch "(^\.|\.(?:sql|log|ini|env|lock|md|py))$">
+  Require all denied
+</FilesMatch>

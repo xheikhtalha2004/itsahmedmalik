@@ -1,0 +1,14 @@
+Options -Indexes
+
+# Bound request parsing at the web-server layer. The PHP checks below provide
+# endpoint-specific JSON errors; these limits also cover chunked request bodies
+# before PHP allocates/parses them.
+<Files "contact.php">
+    LimitRequestBody 65536
+</Files>
+<Files "meeting.php">
+    LimitRequestBody 32768
+</Files>
+<Files "newsletter.php">
+    LimitRequestBody 16384
+</Files>

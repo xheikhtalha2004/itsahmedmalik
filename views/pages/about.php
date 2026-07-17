@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>About Ahmed Malik | Founder, Software Developer & AI Strategist</title>
+    <meta name="description" content="Learn about Ahmed Malik, his background, strengths, endorsements, education, and experience across software, AI, product design, and startup execution." />
+  <meta name="author" content="Ahmed Malik" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="canonical" href="https://itsahmedmalik.com/about.html" />
+<meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Ahmed Malik" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About Ahmed Malik | Founder, Software Developer & AI Strategist" />
+  <meta property="og:description" content="Learn about Ahmed Malik, his background, strengths, endorsements, education, and experience across software, AI, product design, and startup execution." />
+  <meta property="og:url" content="https://itsahmedmalik.com/about.html" />
+  <meta property="og:image" content="https://itsahmedmalik.com/images/why_choose_me.png" />
+  <meta property="og:image:alt" content="About Ahmed Malik" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About Ahmed Malik | Founder, Software Developer & AI Strategist" />
+  <meta name="twitter:description" content="Learn about Ahmed Malik, his background, strengths, endorsements, education, and experience across software, AI, product design, and startup execution." />
+  <meta name="twitter:image" content="https://itsahmedmalik.com/images/why_choose_me.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header id="header">
+    <nav class="nav-container">
+      <div class="nav-links-left">
+        <a href="index.html" class="nav-link">Home</a>
+        <span class="nav-divider">/</span>
+        <a href="about.html" class="nav-link">About</a>
+        <span class="nav-divider">/</span>
+        <a href="work.html" class="nav-link">Work</a>
+      </div>
+      <a href="index.html" class="nav-logo">
+        <img src="images/gradient_logo.svg" alt="Ahmed Malik Logo" class="nav-logo-img" />
+      </a>
+      <div class="nav-links-right">
+        <a href="certifications.html" class="nav-link">Certifications</a>
+        <span class="nav-divider">/</span>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <span class="nav-divider">/</span>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="nav-border"></div>
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="index.html" class="nav-mobile-link">Home</a>
+      <a href="about.html" class="nav-mobile-link">About</a>
+      <a href="work.html" class="nav-mobile-link">Work</a>
+      <a href="certifications.html" class="nav-mobile-link">Certifications</a>
+      <a href="blog.html" class="nav-mobile-link">Blog</a>
+      <a href="contact.html" class="nav-mobile-link">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="contact-hero cert-hero">
+      <h1 class="cert-hero-title">About Ahmed Malik</h1>
+      <p class="cert-hero-subtitle">Strengths, endorsements, and academic foundations behind the work.</p>
+    </section>
+
+    <section class="about-showcase-section">
+      <div class="about-showcase-shell">
+        <div class="about-showcase-copy">
+          <h2 class="about-showcase-title">Building Beautiful and Functional Solutions</h2>
+        </div>
+
+        <div class="about-gallery-track" data-gallery-track>
+          <article class="about-gallery-card">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Product design and interface planning" class="about-gallery-image" />
+            <div class="about-gallery-overlay"></div>
+            <div class="about-gallery-content">
+              <p class="about-gallery-card-title">Product Design Systems</p>
+              <p class="about-gallery-card-text">Design direction, UX structure, and polished interfaces prepared for real implementation.</p>
+            </div>
+          </article>
+
+          <article class="about-gallery-card">
+            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Software development workspace with code on screen" class="about-gallery-image" />
+            <div class="about-gallery-overlay"></div>
+            <div class="about-gallery-content">
+              <p class="about-gallery-card-title">Software Engineering</p>
+              <p class="about-gallery-card-text">Modern web platforms and business systems built for performance, scale, and clarity.</p>
+            </div>
+          </article>
+
+          <article class="about-gallery-card">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="AI visualization and machine intelligence concept" class="about-gallery-image" />
+            <div class="about-gallery-overlay"></div>
+            <div class="about-gallery-content">
+              <p class="about-gallery-card-title">AI Workflow Design</p>
+              <p class="about-gallery-card-text">LLM-powered systems and automation flows that reduce friction and create operational leverage.</p>
+            </div>
+          </article>
+
+          <article class="about-gallery-card">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Team collaboration and startup execution meeting" class="about-gallery-image" />
+            <div class="about-gallery-overlay"></div>
+            <div class="about-gallery-content">
+              <p class="about-gallery-card-title">Startup Execution</p>
+              <p class="about-gallery-card-text">Cross-functional product delivery that connects design, engineering, and growth into one system.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mission-vision-section">
+      <div class="mission-vision-grid">
+        <article class="mission-vision-card">
+          <h2 class="mission-vision-title">My Mission</h2>
+          <p class="mission-vision-text">To develop innovative AI-driven and software solutions that empower businesses, streamline processes, and deliver real-world value, while fostering a culture of creativity, collaboration, and growth.</p>
+        </article>
+
+        <article class="mission-vision-card">
+          <h2 class="mission-vision-title">My Vision</h2>
+          <p class="mission-vision-text">To be a leading global technology partner, recognized for creating scalable, impactful products and strategies that transform businesses, drive innovation, and shape the future of AI and software development.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="about-profile-section">
+      <div class="about-profile-grid">
+        <div class="about-profile-copy">
+          <h2 class="about-profile-title">About Ahmed Malik</h2>
+          <div class="about-profile-text">
+            <p>Ahmed Malik is a technology professional and entrepreneur based in Pakistan, recognized for his expertise in software development, AI-driven product building, and startup growth. He holds a Bachelor of Computer Science from COMSATS University Islamabad, where he cultivated a strong foundation in programming, data structures, and software development principles.</p>
+            <p>Throughout his career, Ahmed has accumulated extensive experience in both executive and technical roles across various organizations. His journey began with a passion for technology and a desire to solve real-world problems through innovative solutions. This passion drove him to excel in multiple programming languages, including Java, C++, and Python, as well as modern web development frameworks.</p>
+            <p>As Co-founder and Chief Marketing Officer of e-Deviser Private Limited, Ahmed was instrumental in developing digital platforms and strategic initiatives that enhanced user engagement and business operations. His role involved not only technical development but also crafting effective marketing strategies to promote the company&rsquo;s vision.</p>
+            <p>Currently, as the founder of TAM Technologies, Ahmed focuses on building AI-powered products and scalable software solutions that address the evolving needs of businesses in the digital age. His work emphasizes the integration of technology and entrepreneurship, aiming to create impactful solutions that foster growth and innovation.</p>
+            <p>Beyond his professional pursuits, Ahmed is deeply committed to the startup ecosystem. He actively contributes to initiatives that support emerging entrepreneurs, sharing his insights on marketing strategy, team building, and product development. His dedication to mentoring and guiding others reflects his belief in the power of collaboration and community in driving technological advancement.</p>
+            <p>In his personal life, Ahmed values continuous learning and exploration. He is passionate about staying updated with the latest advancements in technology and AI, believing that innovation is key to addressing future challenges. His journey is characterized by a blend of technical skill, strategic thinking, and a commitment to making a positive impact in the world through technology.</p>
+          </div>
+
+          <div class="about-profile-icon-widget" aria-hidden="true">
+            <div class="about-profile-cpu-shell">
+              <svg class="about-profile-cpu" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                <g
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-width="0.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-dasharray="100 100"
+                  pathLength="100"
+                  marker-start="url(#about-cpu-circle-marker)"
+                >
+                  <path d="M 10 20 h 79.5 q 5 0 5 5 v 30" />
+                  <path d="M 180 10 h -69.7 q -5 0 -5 5 v 30" />
+                  <path d="M 130 20 v 21.8 q 0 5 -5 5 h -10" />
+                  <path d="M 170 80 v -21.8 q 0 -5 -5 -5 h -50" />
+                  <path d="M 135 65 h 15 q 5 0 5 5 v 10 q 0 5 -5 5 h -39.8 q -5 0 -5 -5 v -20" />
+                  <path d="M 94.8 95 v -36" />
+                  <path d="M 88 88 v -15 q 0 -5 -5 -5 h -10 q -5 0 -5 -5 v -5 q 0 -5 5 -5 h 14" />
+                  <path d="M 30 30 h 25 q 5 0 5 5 v 6.5 q 0 5 5 5 h 20" />
+                  <animate
+                    attributeName="stroke-dashoffset"
+                    from="100"
+                    to="0"
+                    dur="1s"
+                    fill="freeze"
+                    calcMode="spline"
+                    keySplines="0.25,0.1,0.5,1"
+                    keyTimes="0; 1"
+                  />
+                </g>
+
+                <g mask="url(#about-cpu-mask-1)">
+                  <circle class="cpu-node-glow" cx="0" cy="0" r="8" fill="url(#about-cpu-blue-grad)">
+                    <animateMotion dur="5s" begin="1s" repeatCount="indefinite" path="M 10 20 h 79.5 q 5 0 5 5 v 30" />
+                  </circle>
+                </g>
+                <g mask="url(#about-cpu-mask-2)">
+                  <circle class="cpu-node-glow" cx="0" cy="0" r="8" fill="url(#about-cpu-yellow-grad)">
+                    <animateMotion dur="2s" begin="6s" repeatCount="indefinite" path="M 180 10 h -69.7 q -5 0 -5 5 v 40" />
+                  </circle>
+                </g>
+                <g mask="url(#about-cpu-mask-3)">
+                  <circle class="cpu-node-glow" cx="0" cy="0" r="8" fill="url(#about-cpu-pink-grad)">
+                    <animateMotion dur="6s" begin="4s" repeatCount="indefinite" path="M 130 20 v 21.8 q 0 5 -5 5 h -25" />
+                  </circle>
+                </g>
+                <g mask="url(#about-cpu-mask-4)">
+                  <circle class="cpu-node-glow" cx="0" cy="0" r="8" fill="url(#about-cpu-white-grad)">
+                    <animateMotion dur="3s" begin="3s" repeatCount="indefinite" path="M 170 80 v -21.8 q 0 -5 -5 -5 h -65" />
+                  </circle>
+                </g>
+                <g mask="url(#about-cpu-mask-5)">
+                  <circle class="cpu-node-glow" cx="0" cy="0" r="8" fill="url(#about-cpu-green-grad)">
+                    <animateMotion dur="4s" begin="9s" repeatCount="indefinite" path="M 135 65 h 15 q 5 0 5 5 v 10 q 0 5 -5 5 h -39.8 q -5 0 -5 -5 v -35" />
+                  </circle>
+                </g>
+                <g mask="url(#about-cpu-mask-6)">
+                  <circle class="cpu-node-glow" cx="0" cy="0" r="8" fill="url(#about-cpu-orange-grad)">
+                    <animateMotion dur="7s" begin="3s" repeatCount="indefinite" path="M 94.8 95 v -46" />
+                  </circle>
+                </g>
+                <g mask="url(#about-cpu-mask-7)">
+                  <circle class="cpu-node-glow" cx="0" cy="0" r="8" fill="url(#about-cpu-cyan-grad)">
+                    <animateMotion dur="4s" begin="4s" repeatCount="indefinite" path="M 88 88 v -15 q 0 -5 -5 -5 h -10 q -5 0 -5 -5 v -5 q 0 -5 5 -5 h 28" />
+                  </circle>
+                </g>
+                <g mask="url(#about-cpu-mask-8)">
+                  <circle class="cpu-node-glow" cx="0" cy="0" r="8" fill="url(#about-cpu-rose-grad)">
+                    <animateMotion dur="3s" begin="3s" repeatCount="indefinite" path="M 30 30 h 25 q 5 0 5 5 v 6.5 q 0 5 5 5 h 35" />
+                  </circle>
+                </g>
+
+                <g fill="url(#about-cpu-connection-gradient)">
+                  <rect x="93" y="37" width="2.5" height="5" rx="0.7" />
+                  <rect x="104" y="37" width="2.5" height="5" rx="0.7" />
+                  <rect x="116.3" y="44" width="2.5" height="5" rx="0.7" transform="rotate(90 116.25 45.5)" />
+                  <rect x="122.8" y="44" width="2.5" height="5" rx="0.7" transform="rotate(90 116.25 45.5)" />
+                  <rect x="104" y="16" width="2.5" height="5" rx="0.7" transform="rotate(180 105.25 39.5)" />
+                  <rect x="114.5" y="16" width="2.5" height="5" rx="0.7" transform="rotate(180 105.25 39.5)" />
+                  <rect x="80" y="-13.6" width="2.5" height="5" rx="0.7" transform="rotate(270 115.25 19.5)" />
+                  <rect x="87" y="-13.6" width="2.5" height="5" rx="0.7" transform="rotate(270 115.25 19.5)" />
+                </g>
+                <rect x="85" y="40" width="30" height="20" rx="2" fill="#181818" filter="url(#about-cpu-light-shadow)" />
+                <text
+                  x="100"
+                  y="53"
+                  font-size="7"
+                  fill="url(#about-cpu-text-gradient)"
+                  font-weight="700"
+                  letter-spacing="0.08em"
+                  text-anchor="middle"
+                >
+                  AI
+                </text>
+
+                <defs>
+                  <mask id="about-cpu-mask-1"><path d="M 10 20 h 79.5 q 5 0 5 5 v 24" stroke-width="0.5" stroke="white" /></mask>
+                  <mask id="about-cpu-mask-2"><path d="M 180 10 h -69.7 q -5 0 -5 5 v 24" stroke-width="0.5" stroke="white" /></mask>
+                  <mask id="about-cpu-mask-3"><path d="M 130 20 v 21.8 q 0 5 -5 5 h -10" stroke-width="0.5" stroke="white" /></mask>
+                  <mask id="about-cpu-mask-4"><path d="M 170 80 v -21.8 q 0 -5 -5 -5 h -50" stroke-width="0.5" stroke="white" /></mask>
+                  <mask id="about-cpu-mask-5"><path d="M 135 65 h 15 q 5 0 5 5 v 10 q 0 5 -5 5 h -39.8 q -5 0 -5 -5 v -20" stroke-width="0.5" stroke="white" /></mask>
+                  <mask id="about-cpu-mask-6"><path d="M 94.8 95 v -36" stroke-width="0.5" stroke="white" /></mask>
+                  <mask id="about-cpu-mask-7"><path d="M 88 88 v -15 q 0 -5 -5 -5 h -10 q -5 0 -5 -5 v -5 q 0 -5 5 -5 h 14" stroke-width="0.5" stroke="white" /></mask>
+                  <mask id="about-cpu-mask-8"><path d="M 30 30 h 25 q 5 0 5 5 v 6.5 q 0 5 5 5 h 20" stroke-width="0.5" stroke="white" /></mask>
+
+                  <radialGradient id="about-cpu-blue-grad" fx="1">
+                    <stop offset="0%" stop-color="#00E8ED" />
+                    <stop offset="50%" stop-color="#0ea5ff" />
+                    <stop offset="100%" stop-color="transparent" />
+                  </radialGradient>
+                  <radialGradient id="about-cpu-yellow-grad" fx="1">
+                    <stop offset="0%" stop-color="#FFD800" />
+                    <stop offset="50%" stop-color="#FFD800" />
+                    <stop offset="100%" stop-color="transparent" />
+                  </radialGradient>
+                  <radialGradient id="about-cpu-pink-grad" fx="1">
+                    <stop offset="0%" stop-color="#830CD1" />
+                    <stop offset="50%" stop-color="#FF008B" />
+                    <stop offset="100%" stop-color="transparent" />
+                  </radialGradient>
+                  <radialGradient id="about-cpu-white-grad" fx="1">
+                    <stop offset="0%" stop-color="white" />
+                    <stop offset="100%" stop-color="transparent" />
+                  </radialGradient>
+                  <radialGradient id="about-cpu-green-grad" fx="1">
+                    <stop offset="0%" stop-color="#22c55e" />
+                    <stop offset="100%" stop-color="transparent" />
+                  </radialGradient>
+                  <radialGradient id="about-cpu-orange-grad" fx="1">
+                    <stop offset="0%" stop-color="#f97316" />
+                    <stop offset="100%" stop-color="transparent" />
+                  </radialGradient>
+                  <radialGradient id="about-cpu-cyan-grad" fx="1">
+                    <stop offset="0%" stop-color="#06b6d4" />
+                    <stop offset="100%" stop-color="transparent" />
+                  </radialGradient>
+                  <radialGradient id="about-cpu-rose-grad" fx="1">
+                    <stop offset="0%" stop-color="#f43f5e" />
+                    <stop offset="100%" stop-color="transparent" />
+                  </radialGradient>
+
+                  <filter id="about-cpu-light-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="1.5" dy="1.5" stdDeviation="1" flood-color="black" flood-opacity="0.18" />
+                  </filter>
+
+                  <marker id="about-cpu-circle-marker" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="18" markerHeight="18">
+                    <circle cx="5" cy="5" r="2" fill="black" stroke="#232323" stroke-width="0.5">
+                      <animate attributeName="r" values="0; 3; 2" dur="0.5s" />
+                    </circle>
+                  </marker>
+
+                  <linearGradient id="about-cpu-connection-gradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#4F4F4F" />
+                    <stop offset="60%" stop-color="#121214" />
+                  </linearGradient>
+
+                  <linearGradient id="about-cpu-text-gradient" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#5f5f5f">
+                      <animate attributeName="offset" values="-2; -1; 0" dur="5s" repeatCount="indefinite" calcMode="spline" keyTimes="0; 0.5; 1" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                    </stop>
+                    <stop offset="25%" stop-color="white">
+                      <animate attributeName="offset" values="-1; 0; 1" dur="5s" repeatCount="indefinite" calcMode="spline" keyTimes="0; 0.5; 1" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                    </stop>
+                    <stop offset="50%" stop-color="#5f5f5f">
+                      <animate attributeName="offset" values="0; 1; 2" dur="5s" repeatCount="indefinite" calcMode="spline" keyTimes="0; 0.5; 1" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+                    </stop>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-profile-images">
+          <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Ahmed Malik style product planning and design workspace" class="about-profile-image about-profile-image-top" />
+          <img src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Creative software design and development setup" class="about-profile-image about-profile-image-bottom" />
+        </div>
+      </div>
+    </section>
+
+    <section class="why-choose">
+      <h2 class="why-title">Why Choose Me?</h2>
+    </section>
+
+    <section id="about" class="values-section">
+      <div class="values-content">
+        <div class="values-list">
+          <div class="value-item active" id="value-leadership">
+            <div class="value-header">
+              <h3 class="value-title">Leadership &amp; Team Building</h3>
+              <span class="value-arrow">&rarr;</span>
+            </div>
+            <div class="value-desc">
+              <p>I lead teams with clarity and vision, uniting developers, designers, and marketers to build impactful products and successful startups. I foster collaboration, mentor talent, and create an environment where innovation thrives.</p>
+            </div>
+            <div class="value-divider"></div>
+          </div>
+
+          <div class="value-item" id="value-strategy">
+            <div class="value-header">
+              <h3 class="value-title">Strategic Thinking</h3>
+              <span class="value-arrow">&rarr;</span>
+            </div>
+            <div class="value-desc">
+              <p>I combine technology, data, and business strategy to turn ideas into scalable products that solve real-world problems and drive business growth. I identify opportunities, mitigate risks, and plan for long-term success.</p>
+            </div>
+            <div class="value-divider"></div>
+          </div>
+
+          <div class="value-item" id="value-communication">
+            <div class="value-header">
+              <h3 class="value-title">Public Communication</h3>
+              <span class="value-arrow">&rarr;</span>
+            </div>
+            <div class="value-desc">
+              <p>Strong in public speaking, presentations, and stakeholder engagement, I ensure teams, investors, and clients clearly understand the vision and direction, building trust and alignment.</p>
+            </div>
+            <div class="value-divider"></div>
+          </div>
+
+          <div class="value-item" id="value-execution">
+            <div class="value-header">
+              <h3 class="value-title">Execution &amp; Delivery</h3>
+              <span class="value-arrow">&rarr;</span>
+            </div>
+            <div class="value-desc">
+              <p>Focused on transforming ideas into reality&mdash;from AI systems, software solutions, and products to marketing strategies and startup growth initiatives. I ensure high-quality outcomes on time and within scope.</p>
+            </div>
+            <div class="value-divider"></div>
+          </div>
+
+          <div class="value-item" id="value-innovation">
+            <div class="value-header">
+              <h3 class="value-title">Innovation &amp; Problem Solving</h3>
+              <span class="value-arrow">&rarr;</span>
+            </div>
+            <div class="value-desc">
+              <p>I thrive on tackling complex challenges with creative and practical solutions, using AI, data analytics, and cutting-edge technologies to drive meaningful results.</p>
+            </div>
+            <div class="value-divider"></div>
+          </div>
+
+          <div class="value-item" id="value-adaptability">
+            <div class="value-header">
+              <h3 class="value-title">Adaptability &amp; Growth Mindset</h3>
+              <span class="value-arrow">&rarr;</span>
+            </div>
+            <div class="value-desc">
+              <p>Able to navigate fast-changing tech landscapes, I embrace learning, adapt strategies, and pivot quickly to seize opportunities in evolving markets.</p>
+            </div>
+            <div class="value-divider"></div>
+          </div>
+
+          <div class="value-item" id="value-vision">
+            <div class="value-header">
+              <h3 class="value-title">Vision &amp; Impact</h3>
+              <span class="value-arrow">&rarr;</span>
+            </div>
+            <div class="value-desc">
+              <p>I build products and strategies that not only succeed commercially but also create lasting value for users, businesses, and communities.</p>
+            </div>
+            <div class="value-divider"></div>
+          </div>
+        </div>
+        <div class="values-image">
+          <img src="images/why_choose_me.png" alt="Ahmed Malik &mdash; why choose me workspace" class="laptop-img" />
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="endorsements-section">
+      <h2 class="testimonials-title">WHAT FOUNDERS &amp; PEERS SAY ABOUT AHMED MALIK?</h2>
+      <div class="testimonials-slider" aria-label="Ahmed Malik endorsements">
+        <div class="testimonials-viewport">
+          <div class="testimonials-track" id="testimonials-track">
+            <article class="testimonial-card">
+              <div class="testimonial-card-top">
+                <span class="testimonial-quote-mark">"</span>
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              </div>
+              <p class="testimonial-text">Ahmed brings clarity, discipline, and technical confidence to every conversation. He understands how to align software execution with real operational needs and long-term impact.</p>
+              <div class="testimonial-author">
+                <div class="author-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">AN</div>
+                <div class="author-meta">
+                  <p class="author-name">Adnan</p>
+                  <p class="author-role">Assistant Director, NADRA</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-card-top">
+                <span class="testimonial-quote-mark">"</span>
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              </div>
+              <p class="testimonial-text">He combines technical depth with strong communication, which is rare. Ahmed approaches problems with structure, thinks beyond the obvious solution, and consistently pushes work toward meaningful outcomes.</p>
+              <div class="testimonial-author">
+                <div class="author-avatar" style="background: linear-gradient(135deg, #11998e, #38ef7d);">SR</div>
+                <div class="author-meta">
+                  <p class="author-name">Dr. Saeed ur Rehman</p>
+                  <p class="author-role">Associate Professor, COMSATS Wah</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-card-top">
+                <span class="testimonial-quote-mark">"</span>
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              </div>
+              <p class="testimonial-text">Working with Ahmed means working with someone who moves fast without losing quality. He is dependable under pressure, thoughtful in implementation, and strong at turning ideas into shipping products.</p>
+              <div class="testimonial-author">
+                <div class="author-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">TY</div>
+                <div class="author-meta">
+                  <p class="author-name">Talha Yasin</p>
+                  <p class="author-role">Senior Developer, TAMx</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-card-top">
+                <span class="testimonial-quote-mark">"</span>
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              </div>
+              <p class="testimonial-text">Ahmed has the founder mindset you want around an early-stage business. He can think through product, execution, and growth at the same time, which makes him valuable well beyond development alone.</p>
+              <div class="testimonial-author">
+                <div class="author-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">BB</div>
+                <div class="author-meta">
+                  <p class="author-name">Bilal Bin Talib</p>
+                  <p class="author-role">Founder, EDeviser</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-card-top">
+                <span class="testimonial-quote-mark">"</span>
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              </div>
+              <p class="testimonial-text">He brings a strong mix of ambition, execution, and market awareness. Ahmed understands how to turn technical capability into startup momentum, which is exactly what growing ventures need.</p>
+              <div class="testimonial-author">
+                <div class="author-avatar" style="background: linear-gradient(135deg, #fa709a, #fee140);">AI</div>
+                <div class="author-meta">
+                  <p class="author-name">Asim Ilyas</p>
+                  <p class="author-role">Business Development Manager, PITB Incubation Wing</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="testimonial-slider-controls">
+          <button class="testimonial-nav-btn" id="testimonial-prev" type="button" aria-label="Previous testimonial">&#8249;</button>
+          <div class="testimonial-dots" id="testimonial-dots" aria-label="Testimonial navigation"></div>
+          <button class="testimonial-nav-btn" id="testimonial-next" type="button" aria-label="Next testimonial">&#8250;</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="experience-section">
+      <h2 class="experience-title">Educational Background</h2>
+      <div class="edu-tree">
+        <div class="edu-trunk"></div>
+        <div class="edu-branches">
+          <div class="edu-branch">
+            <div class="edu-connector">
+              <div class="edu-line"></div>
+              <div class="edu-dot"></div>
+            </div>
+            <div class="edu-card">
+              <div class="edu-badge">01</div>
+              <div class="edu-info">
+                <h3 class="edu-degree">Matric</h3>
+                <p class="edu-institution">KRL Model College for Boys</p>
+                <span class="edu-tag">Secondary Education</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="edu-branch">
+            <div class="edu-connector">
+              <div class="edu-line"></div>
+              <div class="edu-dot"></div>
+            </div>
+            <div class="edu-card">
+              <div class="edu-badge">02</div>
+              <div class="edu-info">
+                <h3 class="edu-degree">FSC</h3>
+                <p class="edu-institution">KRL Model College for Boys</p>
+                <span class="edu-tag">Higher Secondary</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="edu-branch">
+            <div class="edu-connector">
+              <div class="edu-line"></div>
+              <div class="edu-dot"></div>
+            </div>
+            <div class="edu-card">
+              <div class="edu-badge">03</div>
+              <div class="edu-info">
+                <h3 class="edu-degree">BS Computer Science</h3>
+                <p class="edu-institution">COMSATS University Islamabad</p>
+                <span class="edu-tag">Bachelor's Degree</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="edu-branch">
+            <div class="edu-connector">
+              <div class="edu-line"></div>
+              <div class="edu-dot"></div>
+            </div>
+            <div class="edu-card">
+              <div class="edu-badge">04</div>
+              <div class="edu-info">
+                <h3 class="edu-degree">Professional Degree in Public Administration</h3>
+                <p class="edu-institution">IIUI &mdash; International Islamic University Islamabad</p>
+                <span class="edu-tag">Professional Degree</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+      <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/gradient_logo.svg" alt="Ahmed Malik Logo" class="footer-logo-img" style="height:40px; margin-bottom:1rem;" />
+        <p class="footer-tagline">Get weekly news on itsahmedmalik.com</p>
+        <form class="newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Enter your email" class="newsletter-input" />
+          <button type="submit" class="newsletter-btn">Let me know</button>
+        </form>
+        <div style="margin-top: 2rem;">
+          <a href="contact.html" class="newsletter-btn" style="text-decoration:none; display:inline-block; font-family:var(--font-main);">Contact Now &#8594;</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <p class="footer-col-title">Features</p>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="work.html" class="footer-link">Work</a>
+          <a href="certifications.html" class="footer-link">Certifications</a>
+          <a href="blog.html" class="footer-link">Blog</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Company</p>
+          <a href="https://tamxai.com" target="_blank" rel="noopener noreferrer" class="footer-link">TAMx</a>
+          <a href="#" class="footer-link">QuickSilver</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-wordmark">AHMED MALIK</div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">2026 &copy; Ahmed Malik Copyright</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
