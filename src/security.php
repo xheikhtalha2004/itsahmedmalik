@@ -66,7 +66,7 @@ function request_is_same_origin(): bool
 {
     $secFetch = strtolower((string) ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? ''));
     if ($secFetch === 'cross-site') {
-        error_log("[Origin Debug] sec-fetch-site is cross-site");
+        app_log('origin_debug_failed', ['reason' => 'sec_fetch_cross_site']);
         return false;
     }
 
@@ -79,14 +79,14 @@ function request_is_same_origin(): bool
     $scheme = strtolower((string) parse_url($origin, PHP_URL_SCHEME));
     $appScheme = strtolower((string) parse_url((string) app_config('app_url', ''), PHP_URL_SCHEME));
     if ($host === '' || $scheme === '' || $appScheme === '' || !hash_equals($appScheme, $scheme)) {
-        error_log("[Origin Debug] Scheme/host empty or mismatch: host=$host, scheme=$scheme, appScheme=$appScheme");
+        app_log('origin_debug_failed', ['reason' => 'scheme_host_mismatch']);
         return false;
     }
     $defaultPort = $scheme === 'https' ? 443 : 80;
     $originPort = (int) (parse_url($origin, PHP_URL_PORT) ?: $defaultPort);
     $appPort = (int) (parse_url((string) app_config('app_url', ''), PHP_URL_PORT) ?: $defaultPort);
     if ($originPort !== $appPort) {
-        error_log("[Origin Debug] Port mismatch: originPort=$originPort, appPort=$appPort");
+        app_log('origin_debug_failed', ['reason' => 'port_mismatch']);
         return false;
     }
 
@@ -95,13 +95,13 @@ function request_is_same_origin(): bool
         PHP_URL_HOST,
     ), '.'));
     if ($requestHost !== '' && !hash_equals($requestHost, $host)) {
-        error_log("[Origin Debug] requestHost mismatch: requestHost=$requestHost, host=$host");
+        app_log('origin_debug_failed', ['reason' => 'request_host_mismatch']);
         return false;
     }
 
     $allowed = allowed_hosts();
     if (!in_array($host, $allowed, true)) {
-        error_log("[Origin Debug] Host not in allowed_hosts: host=$host, allowed=" . implode(',', $allowed));
+        app_log('origin_debug_failed', ['reason' => 'host_not_allowed']);
         return false;
     }
 
