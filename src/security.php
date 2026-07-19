@@ -64,7 +64,9 @@ function require_public_post(int $maximumBytes = 65_536): void
 
 function request_is_same_origin(): bool
 {
-    if (strtolower((string) ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? '')) === 'cross-site') {
+    $secFetch = strtolower((string) ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? ''));
+    if ($secFetch === 'cross-site') {
+        error_log("[Origin Debug] sec-fetch-site is cross-site");
         return false;
     }
 
@@ -77,24 +79,33 @@ function request_is_same_origin(): bool
     $scheme = strtolower((string) parse_url($origin, PHP_URL_SCHEME));
     $appScheme = strtolower((string) parse_url((string) app_config('app_url', ''), PHP_URL_SCHEME));
     if ($host === '' || $scheme === '' || $appScheme === '' || !hash_equals($appScheme, $scheme)) {
+        error_log("[Origin Debug] Scheme/host empty or mismatch: host=$host, scheme=$scheme, appScheme=$appScheme");
         return false;
     }
     $defaultPort = $scheme === 'https' ? 443 : 80;
     $originPort = (int) (parse_url($origin, PHP_URL_PORT) ?: $defaultPort);
     $appPort = (int) (parse_url((string) app_config('app_url', ''), PHP_URL_PORT) ?: $defaultPort);
     if ($originPort !== $appPort) {
+        error_log("[Origin Debug] Port mismatch: originPort=$originPort, appPort=$appPort");
         return false;
     }
 
     $requestHost = strtolower(rtrim((string) parse_url(
-        $appScheme . '://' . (string) ($_SERVER['HTTP_HOST'] ?? ''),
+        $appScheme . '://' . (string) ($_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'] ?? ''),
         PHP_URL_HOST,
     ), '.'));
     if ($requestHost !== '' && !hash_equals($requestHost, $host)) {
+        error_log("[Origin Debug] requestHost mismatch: requestHost=$requestHost, host=$host");
         return false;
     }
 
-    return in_array($host, allowed_hosts(), true);
+    $allowed = allowed_hosts();
+    if (!in_array($host, $allowed, true)) {
+        error_log("[Origin Debug] Host not in allowed_hosts: host=$host, allowed=" . implode(',', $allowed));
+        return false;
+    }
+
+    return true;
 }
 
 /** @return list<string> */
