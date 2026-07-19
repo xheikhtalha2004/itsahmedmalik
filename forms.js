@@ -200,25 +200,115 @@
       form.querySelector(focusableSelector)?.focus();
     };
 
-    const date = form.elements.namedItem('date');
-    if (date instanceof HTMLInputElement) {
-      // The PHP template supplies PKT-aware limits. Only provide a fallback
-      // when this controller is reused outside that template.
-      if (!date.min || !date.max) {
-        const firstAvailable = new Date();
-        firstAvailable.setDate(firstAvailable.getDate() + 1);
-        const max = new Date();
-        max.setDate(max.getDate() + 90);
-        const localDate = value => new Date(value.getTime() - value.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-        date.min ||= localDate(firstAvailable);
-        date.max ||= localDate(max);
+    // Interactive calendar setup
+    const dateInput = form.elements.namedItem('date');
+    const dateDisplay = document.getElementById('meeting-date-display');
+    const calendarGrid = document.getElementById('calendar-days-grid');
+    const calendarMonthYear = document.getElementById('calendar-month-year');
+    const prevBtn = document.getElementById('calendar-prev');
+    const nextBtn = document.getElementById('calendar-next');
+
+    if (dateInput && dateDisplay && calendarGrid && calendarMonthYear && prevBtn && nextBtn) {
+      let currentDate = new Date();
+      let selectedDate = null;
+
+      // Extract limit bounds from hidden input
+      const minDateStr = dateInput.getAttribute('min') || new Date().toISOString().slice(0, 10);
+      const maxDateStr = dateInput.getAttribute('max') || new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+
+      const minDate = new Date(`${minDateStr}T00:00:00`);
+      const maxDate = new Date(`${maxDateStr}T23:59:59`);
+
+      const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+
+      function renderCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+
+        calendarMonthYear.textContent = `${months[month]} ${year}`;
+
+        // Determine starting weekday (0 is Sunday, 1 is Monday ...)
+        const firstDayIndex = new Date(year, month, 1).getDay();
+        // Shift so 0 is Monday, 6 is Sunday
+        const firstDay = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+
+        const totalDays = new Date(year, month + 1, 0).getDate();
+        const prevTotalDays = new Date(year, month, 0).getDate();
+
+        calendarGrid.innerHTML = '';
+
+        // Muted padding days from previous month
+        for (let i = firstDay; i > 0; i--) {
+          const dayNum = prevTotalDays - i + 1;
+          const dayElement = document.createElement('button');
+          dayElement.type = 'button';
+          dayElement.className = 'meeting-day is-muted';
+          dayElement.disabled = true;
+          dayElement.textContent = dayNum;
+          calendarGrid.appendChild(dayElement);
+        }
+
+        // Active days for current month
+        for (let dayNum = 1; dayNum <= totalDays; dayNum++) {
+          const checkDate = new Date(year, month, dayNum);
+          const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayNum).padStart(2, '0')}`;
+          
+          const dayElement = document.createElement('button');
+          dayElement.type = 'button';
+          dayElement.className = 'meeting-day';
+          dayElement.textContent = dayNum;
+
+          // Saturdays and Sundays are disabled
+          const isWeekend = checkDate.getDay() === 0 || checkDate.getDay() === 6;
+
+          // Check past or 90 days out
+          const checkTime = new Date(year, month, dayNum, 0, 0, 0).getTime();
+          const isPast = checkTime < new Date(minDate).setHours(0,0,0,0);
+          const isTooFar = checkTime > new Date(maxDate).setHours(23,59,59,999);
+
+          if (isWeekend || isPast || isTooFar) {
+            dayElement.classList.add('is-disabled');
+            dayElement.disabled = true;
+          } else {
+            if (selectedDate && dateStr === selectedDate) {
+              dayElement.classList.add('is-selected');
+            }
+
+            dayElement.addEventListener('click', (e) => {
+              e.preventDefault();
+              calendarGrid.querySelectorAll('.meeting-day').forEach(el => el.classList.remove('is-selected'));
+              dayElement.classList.add('is-selected');
+              selectedDate = dateStr;
+              dateInput.value = dateStr;
+              
+              const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+              dateDisplay.value = checkDate.toLocaleDateString('en-US', options);
+              dateInput.setCustomValidity('');
+            });
+          }
+
+          calendarGrid.appendChild(dayElement);
+        }
       }
-      date.addEventListener('input', () => {
-        if (!date.value) return;
-        const day = new Date(`${date.value}T12:00:00`).getDay();
-        date.setCustomValidity(day === 0 || day === 6 ? 'Please choose a weekday.' : '');
+
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
       });
+
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+      });
+
+      renderCalendar();
     }
+
 
     openButton.addEventListener('click', open);
     closeButton.addEventListener('click', close);
