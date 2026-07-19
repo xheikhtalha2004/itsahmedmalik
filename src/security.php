@@ -79,7 +79,10 @@ function request_is_same_origin(): bool
     $scheme = strtolower((string) parse_url($origin, PHP_URL_SCHEME));
     $appScheme = strtolower((string) parse_url((string) app_config('app_url', ''), PHP_URL_SCHEME));
     if ($host === '' || $scheme === '' || $appScheme === '' || !hash_equals($appScheme, $scheme)) {
-        app_log('origin_debug_failed', ['reason' => 'scheme_host_mismatch']);
+        app_log('origin_debug_failed', [
+            'reason' => 'scheme_host_mismatch',
+            'exception' => "host=$host;scheme=$scheme;appScheme=$appScheme;origin=$origin"
+        ]);
         return false;
     }
     $defaultPort = $scheme === 'https' ? 443 : 80;
