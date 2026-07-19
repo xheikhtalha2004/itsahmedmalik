@@ -185,7 +185,7 @@ function admin_pkt_display(?string $utc): string
                                 <label class="field wide">
                                     <span><?= e($module['media']['label']) ?><?= !$record ? ' *' : '' ?></span>
                                     <?php if (($record['media_path'] ?? '') !== ''): ?>
-                                        <img class="media-preview" src="<?= e($record['media_path']) ?>" alt="Current image">
+                                        <img class="media-preview" src="<?= e('/' . ltrim((string) $record['media_path'], '/')) ?>" alt="Current image">
                                     <?php endif; ?>
                                     <input type="file" name="<?= e($module['media']['input']) ?>" accept="image/jpeg,image/png,image/webp" <?= !$record ? 'required' : '' ?>>
                                     <small>JPEG, PNG, or WebP; maximum 10 MiB and 30 megapixels. The server creates a safe WebP.</small>
@@ -225,7 +225,7 @@ function admin_pkt_display(?string $utc): string
                             <?php if ($images): ?><div class="media-grid">
                                 <?php foreach ($images as $image): ?>
                                     <article class="media-card">
-                                        <img src="<?= e($image['public_path']) ?>" alt="<?= e($image['alt_text']) ?>">
+                                        <img src="<?= e('/' . ltrim((string) $image['public_path'], '/')) ?>" alt="<?= e($image['alt_text']) ?>">
                                         <form class="media-meta-form" method="post" action="/admin/" data-disable-on-submit>
                                             <?php admin_hidden('event_update_image', 'events', $id); ?>
                                             <input type="hidden" name="parent_version" value="<?= (int) $record['version'] ?>">
@@ -245,7 +245,7 @@ function admin_pkt_display(?string $utc): string
                             </div><?php else: ?><p class="empty">No gallery images yet.</p><?php endif; ?>
                             <?php if ($archivedImages): ?><details class="archived-items"><summary>Archived images (<?= count($archivedImages) ?>)</summary><div class="media-grid">
                                 <?php foreach ($archivedImages as $image): ?><article class="media-card">
-                                    <img src="<?= e($image['public_path']) ?>" alt="<?= e($image['alt_text']) ?>">
+                                    <img src="<?= e('/' . ltrim((string) $image['public_path'], '/')) ?>" alt="<?= e($image['alt_text']) ?>">
                                     <p><?= e((string) ($image['caption'] ?? $image['alt_text'])) ?></p>
                                     <form method="post" action="/admin/"><?php admin_hidden('event_restore_image', 'events', $id); ?><input type="hidden" name="parent_version" value="<?= (int) $record['version'] ?>"><input type="hidden" name="image_id" value="<?= (int) $image['id'] ?>"><input type="hidden" name="image_version" value="<?= (int) $image['version'] ?>"><button class="text-button" type="submit">Restore</button></form>
                                 </article><?php endforeach; ?>

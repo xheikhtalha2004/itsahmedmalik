@@ -317,7 +317,7 @@ function admin_save_record(string $key, array $input, array $files): int
         return (int) db()->lastInsertId();
     }
 
-    if ($version < 1) {
+    if ($version < 0) {
         throw new InvalidArgumentException('The record version is missing. Reload and try again.');
     }
     $assignments = [];

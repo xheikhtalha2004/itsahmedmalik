@@ -15,3 +15,7 @@
 /.vscode/
 Thumbs.db
 .DS_Store
+
+# Agent workspace
+/.agents/
+/skills-lock.json
