@@ -540,7 +540,7 @@ function public_render_events(string $html, array $events): string
     foreach ($events as $event) {
         $images = array_values(array_filter(
             array_map(static fn (array $image): array => [
-                'src' => ltrim((string) ($image['public_path'] ?? ''), '/'),
+                'src' => '/' . ltrim((string) ($image['public_path'] ?? ''), '/'),
                 'alt' => (string) ($image['alt_text'] ?? ''),
                 'caption' => (string) ($image['caption'] ?? ''),
             ], $event['images'] ?? []),
@@ -551,7 +551,7 @@ function public_render_events(string $html, array $events): string
         }
 
         $title = (string) $event['title'];
-        $cover = ltrim((string) ($event['cover_path'] ?: $images[0]['src']), '/');
+        $cover = '/' . ltrim((string) ($event['cover_path'] ?: $images[0]['src']), '/');
         $coverAlt = $title;
         foreach ($images as $image) {
             if ($image['src'] === $cover) {

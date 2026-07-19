@@ -19,7 +19,10 @@ try {
     $result = submit_contact($_POST);
     api_json($result['status'], $result['body']);
 } catch (Throwable $exception) {
-    app_log('contact_submission_failed', ['exception' => $exception::class]);
+    app_log('contact_submission_failed', [
+        'exception' => $exception::class,
+        'reason' => $exception->getMessage()
+    ]);
     api_json(503, [
         'ok' => false,
         'code' => 'service_unavailable',

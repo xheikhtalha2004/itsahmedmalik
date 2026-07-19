@@ -210,14 +210,21 @@
 
     if (dateInput && dateDisplay && calendarGrid && calendarMonthYear && prevBtn && nextBtn) {
       let currentDate = new Date();
+      currentDate.setDate(1); // Set to the 1st to prevent month roll-over normalization bugs
       let selectedDate = null;
 
       // Extract limit bounds from hidden input
       const minDateStr = dateInput.getAttribute('min') || new Date().toISOString().slice(0, 10);
       const maxDateStr = dateInput.getAttribute('max') || new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
-      const minDate = new Date(`${minDateStr}T00:00:00`);
-      const maxDate = new Date(`${maxDateStr}T23:59:59`);
+      // Robust manual parser for YYYY-MM-DD to avoid Safari/mobile timezone bugs
+      function parseLocalDate(str) {
+        const parts = str.split('-');
+        return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10), 0, 0, 0);
+      }
+
+      const minDate = parseLocalDate(minDateStr);
+      const maxDate = parseLocalDate(maxDateStr);
 
       const months = [
         'January', 'February', 'March', 'April', 'May', 'June',
@@ -266,8 +273,8 @@
 
           // Check past or 90 days out
           const checkTime = new Date(year, month, dayNum, 0, 0, 0).getTime();
-          const isPast = checkTime < new Date(minDate).setHours(0,0,0,0);
-          const isTooFar = checkTime > new Date(maxDate).setHours(23,59,59,999);
+          const isPast = checkTime < minDate.getTime();
+          const isTooFar = checkTime > maxDate.getTime();
 
           if (isWeekend || isPast || isTooFar) {
             dayElement.classList.add('is-disabled');
