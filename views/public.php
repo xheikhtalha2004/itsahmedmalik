@@ -56,7 +56,7 @@ HTML;
     $html = str_replace('</head>', $headExtras . "\n</head>", $html);
     $html = str_replace(
         '</body>',
-        "  <script src=\"forms.js\"></script>\n  <script src=\"https://challenges.cloudflare.com/turnstile/v0/api.js?onload=portfolioTurnstileReady&amp;render=explicit\" async defer></script>\n</body>",
+        "  <script src=\"forms.js?v=1.1.1\"></script>\n  <script src=\"https://challenges.cloudflare.com/turnstile/v0/api.js?onload=portfolioTurnstileReady&amp;render=explicit\" async defer></script>\n</body>",
         $html
     );
 
@@ -578,7 +578,7 @@ function public_render_events(string $html, array $events): string
     }
     $json = json_encode($payload, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
     $data = '<script type="application/json" id="events-data">' . $json . '</script>';
-    $html = str_replace('<script src="events.js"></script>', $data . "\n  <script src=\"events.js\"></script>", $html);
+    $html = str_replace('<script src="events.js"></script>', $data . "\n  <script src=\"events.js?v=1.1.1\"></script>", $html);
 
     $grid = $payload === []
         ? '<div class="events-empty-state"><p>No event galleries are published yet.</p></div>'
