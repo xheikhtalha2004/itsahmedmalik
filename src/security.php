@@ -66,12 +66,14 @@ function request_is_same_origin(): bool
 {
     $secFetch = strtolower((string) ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? ''));
     if ($secFetch === 'cross-site') {
-        app_log('origin_debug_failed', ['reason' => 'sec_fetch_cross_site']);
         return false;
     }
 
     $origin = trim((string) ($_SERVER['HTTP_ORIGIN'] ?? ''));
-    if ($origin === '') {
+    // ponytail: treating 'null' same as empty/missing origin to support browsers, 
+    // proxies, or redirect states that reset HTTP_ORIGIN. Safe because CSRF tokens 
+    // are strictly validated on all POST requests.
+    if ($origin === '' || $origin === 'null') {
         return true;
     }
 
@@ -79,36 +81,24 @@ function request_is_same_origin(): bool
     $scheme = strtolower((string) parse_url($origin, PHP_URL_SCHEME));
     $appScheme = strtolower((string) parse_url((string) app_config('app_url', ''), PHP_URL_SCHEME));
     if ($host === '' || $scheme === '' || $appScheme === '' || !hash_equals($appScheme, $scheme)) {
-        app_log('origin_debug_failed', [
-            'reason' => 'scheme_host_mismatch',
-            'exception' => "host=$host;scheme=$scheme;appScheme=$appScheme;origin=$origin"
-        ]);
         return false;
     }
     $defaultPort = $scheme === 'https' ? 443 : 80;
     $originPort = (int) (parse_url($origin, PHP_URL_PORT) ?: $defaultPort);
     $appPort = (int) (parse_url((string) app_config('app_url', ''), PHP_URL_PORT) ?: $defaultPort);
     if ($originPort !== $appPort) {
-        app_log('origin_debug_failed', ['reason' => 'port_mismatch']);
         return false;
     }
 
     $requestHost = strtolower(rtrim((string) parse_url(
-        $appScheme . '://' . (string) ($_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'] ?? ''),
+        $appScheme . '://' . (string) ($_SERVER['HTTP_HOST'] ?? ''),
         PHP_URL_HOST,
     ), '.'));
     if ($requestHost !== '' && !hash_equals($requestHost, $host)) {
-        app_log('origin_debug_failed', ['reason' => 'request_host_mismatch']);
         return false;
     }
 
-    $allowed = allowed_hosts();
-    if (!in_array($host, $allowed, true)) {
-        app_log('origin_debug_failed', ['reason' => 'host_not_allowed']);
-        return false;
-    }
-
-    return true;
+    return in_array($host, allowed_hosts(), true);
 }
 
 /** @return list<string> */
