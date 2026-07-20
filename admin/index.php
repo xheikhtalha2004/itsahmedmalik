@@ -72,7 +72,7 @@ function admin_pkt_display(?string $utc): string
     <meta name="robots" content="noindex,nofollow,noarchive">
     <meta name="trix-csp-nonce" content="<?= e(admin_csp_nonce()) ?>">
     <title><?= e(($section === 'dashboard' ? 'Dashboard' : (admin_modules()[$section]['label'] ?? ucfirst($section))) . ' · Ahmed Malik Admin') ?></title>
-    <link rel="stylesheet" href="/admin/assets/admin.css?v=1">
+    <link rel="stylesheet" href="/admin/assets/admin.css?v=2">
     <?php if ($trixAvailable): ?><link rel="stylesheet" href="/admin/assets/vendor/trix/trix.css?v=2.1.18"><?php endif; ?>
     <script src="/admin/assets/editor.js?v=1" defer></script>
     <?php if ($trixAvailable): ?><script src="/admin/assets/vendor/trix/trix.js?v=2.1.18" defer></script><?php endif; ?>
