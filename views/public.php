@@ -49,14 +49,9 @@ function public_render_page(string $template, string $page, ?array $content, ?st
         ])
     );
 
-    $siteKey = e((string) app_config('turnstile.site_key', ''));
-    $headExtras = <<<HTML
-  <meta name="turnstile-site-key" content="{$siteKey}" />
-HTML;
-    $html = str_replace('</head>', $headExtras . "\n</head>", $html);
     $html = str_replace(
         '</body>',
-        "  <script src=\"forms.js?v=1.1.1\"></script>\n  <script src=\"https://challenges.cloudflare.com/turnstile/v0/api.js?onload=portfolioTurnstileReady&amp;render=explicit\" async defer></script>\n</body>",
+        "  <script src=\"forms.js?v=1.1.2\"></script>\n</body>",
         $html
     );
 
@@ -615,7 +610,7 @@ function public_render_contact(string $html): string
         . '<option value="" disabled selected>Select your required services</option><option value="software">Software Development</option>'
         . '<option value="ai">AI Consulting / Integration</option><option value="startup">Startup Advisory</option><option value="other">Other Inquiry</option></select></div>'
         . '<div class="contact-input-group"><label for="messageText">Messages</label><textarea id="messageText" name="message" class="contact-textarea" placeholder="Type a message" minlength="10" maxlength="5000" required></textarea></div>'
-        . '<div class="turnstile-widget" data-action="contact" data-turnstile-action="contact"></div><p class="form-status" data-form-status aria-live="polite"></p>'
+        . '<p class="form-status" data-form-status aria-live="polite"></p>'
         . '<div class="contact-form-actions"><button type="submit" class="contact-submit-btn">Contact Now '
         . '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>'
         . '<button type="button" class="contact-submit-btn contact-secondary-btn" id="open-meeting-modal">Schedule a meeting '
@@ -665,7 +660,7 @@ function public_render_contact(string $html): string
         . '<option value="16:30">4:30 PM</option>'
         . '<option value="17:00">5:00 PM</option>'
         . '</select></div>'
-        . '<div class="turnstile-widget" data-action="meeting" data-turnstile-action="meeting"></div></div></div>'
+        . '</div></div>'
         . '<div class="meeting-modal-footer"><p class="meeting-summary form-status" id="meeting-summary" data-form-status aria-live="polite">Select a weekday and time for your request.</p>'
         . '<button type="submit" class="contact-submit-btn meeting-confirm-btn" id="confirm-meeting">Request meeting</button></div></form></div></div>';
     $html = public_replace_element($html, 'div', 'id', 'meeting-modal', $meeting);

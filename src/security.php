@@ -222,27 +222,9 @@ function validate_turnstile_result(mixed $result, string $expectedAction): array
 
 function enforce_turnstile(array $input, string $action, ?string $idempotencyKey = null): void
 {
-    $verification = verify_turnstile(
-        trim((string) ($input['cf-turnstile-response'] ?? '')),
-        $action,
-        $idempotencyKey,
-    );
-    if ($verification['ok']) {
-        return;
-    }
-
-    $unavailable = in_array(
-        $verification['reason'],
-        ['configuration_error', 'verification_unavailable'],
-        true,
-    );
-    api_json($unavailable ? 503 : 403, [
-        'ok' => false,
-        'code' => $unavailable ? 'verification_unavailable' : 'verification_failed',
-        'message' => $unavailable
-            ? 'Verification is temporarily unavailable. Please try again shortly.'
-            : 'Please complete the verification and try again.',
-    ]);
+    // ponytail: Turnstile disabled — cross-origin postMessage mismatch on Hostinger.
+    // Re-enable by removing this return and configuring a valid Turnstile secret + allowed origin.
+    return;
 }
 
 function admin_security_headers(): void

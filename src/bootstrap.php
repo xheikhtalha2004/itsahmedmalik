@@ -93,6 +93,7 @@ function db(): PDO
         PDO::ATTR_TIMEOUT => 5,
     ]);
     $pdo->exec("SET time_zone = '+00:00'");
+    $pdo->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
     $pdo->exec('SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED');
 
     return $pdo;

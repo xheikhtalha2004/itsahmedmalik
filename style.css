@@ -5139,4 +5139,81 @@ button:disabled {
   .meeting-modal-header { padding-right: 2rem; }
 }
 
+/* ============================================================
+   COMPREHENSIVE FIX: Dropdown appearance + responsiveness v2
+   ============================================================ */
+
+/* Fix the blue triangles/arrows select glitch — force custom chevron on ALL browsers */
+.contact-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: rgba(255,255,255,0.04);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 1rem 1rem;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+/* Prevent native arrow on IE/Edge */
+.contact-select::-ms-expand { display: none; }
+
+.contact-select option {
+  background: #0d1117;
+  color: #fff;
+}
+
+/* Remove any leftover Turnstile widget space */
+.turnstile-widget { display: none !important; }
+
+/* Contact page responsive stacking */
+@media (max-width: 860px) {
+  .contact-layout {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .contact-info-card,
+  .contact-form-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .contact-form-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .contact-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Meeting modal: scrolls properly on small screens */
+.meeting-modal {
+  overflow-y: auto;
+}
+.meeting-modal-dialog {
+  max-height: 90dvh;
+  overflow-y: auto;
+  width: min(820px, 95vw);
+}
+
+/* Meeting scheduler grid: two columns on desktop */
+.meeting-scheduler {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 700px) {
+  .meeting-scheduler {
+    grid-template-columns: 1fr;
+  }
+  .meeting-modal-dialog {
+    padding: 1.25rem;
+    max-height: 100dvh;
+    border-radius: 1rem 1rem 0 0;
+  }
+}
 
