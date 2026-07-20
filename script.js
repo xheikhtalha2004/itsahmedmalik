@@ -833,8 +833,7 @@ function toggleFaq(id) {
   confirmBtn.addEventListener('click', async () => {
     if (!selectedDate || !selectedTime) return;
 
-    // Delegates to assets/js/contact-handler.js which sends the request
-    // to the Supabase Edge Function + Resend email notification.
+    // Delegates to assets/js/contact-handler.js which simulates the request.
     if (typeof window.submitMeetingRequest === 'function') {
       confirmBtn.disabled = true;
       confirmBtn.textContent = 'Scheduling…';

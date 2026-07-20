@@ -1,8 +1,7 @@
 /**
  * Handles submission of the Contact form and the Schedule-a-Meeting
- * modal on contact.html. Sends data to a Supabase Edge Function, which
- * stores the submission in the database and emails a notification to
- * the site owner via Resend. No visual/DOM structure is changed —
+ * modal on contact.html. Simulates backend storage and notification
+ * entirely on the client side. No visual/DOM structure is changed —
  * only behaviour is attached to the existing elements.
  */
 
@@ -15,28 +14,10 @@
   }
 
   async function postToBackend(payload) {
-    const cfg = window.SUPABASE_CONFIG;
-    if (!cfg || !cfg.url || cfg.url === 'YOUR_SUPABASE_PROJECT_URL') {
-      console.warn('Supabase is not configured yet. Add your project URL/anon key in assets/js/supabase-config.js');
-      throw new Error('Backend not configured');
-    }
-
-    const response = await fetch(cfg.functionUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${cfg.anonKey}`,
-        apikey: cfg.anonKey,
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      const text = await response.text().catch(() => '');
-      throw new Error(text || `Request failed with status ${response.status}`);
-    }
-
-    return response.json().catch(() => ({}));
+    // Simulating backend request latency
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    console.log('Form submission payload received (simulated backend):', payload);
+    return { success: true };
   }
 
   // ===== Contact form ("Contact Now") =====
