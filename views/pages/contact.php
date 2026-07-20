@@ -84,8 +84,13 @@
             Reach Me via Email
           </h3>
           <p>I'll get back to you as soon as possible to explore how we can work together.</p>
-          <h4>hello@itsahmedmalik.com</h4>
-          <h4 style="margin-top: 0.5rem;">ahmedhabdulla0@gmail.com</h4>
+          <?php
+          $emailsSetting = portfolio_setting('contact_emails', 'hello@itsahmedmalik.com');
+          $emails = array_filter(array_map('trim', preg_split('/[\n,]+/', $emailsSetting)));
+          foreach ($emails as $index => $email):
+          ?>
+            <h4 style="<?= $index > 0 ? 'margin-top: 0.5rem;' : '' ?>"><?= e($email) ?></h4>
+          <?php endforeach; ?>
         </div>
         
         <div class="contact-info-block">
@@ -94,7 +99,7 @@
             Mobile Number
           </h3>
           <p>Whether it's a quick question, a collaboration opportunity, or a design consultation.</p>
-          <h4>+92 315 5320243</h4>
+          <h4><?= e(portfolio_setting('contact_phone', '+92 315 5320243')) ?></h4>
         </div>
         
         <div class="contact-info-block">
@@ -103,21 +108,21 @@
             Location
           </h3>
           <p>If you'd like to connect, ask questions, or start a new project, feel free to reach out.</p>
-          <h4>Islamabad, Pakistan</h4>
+          <h4><?= e(portfolio_setting('contact_location', 'Islamabad, Pakistan')) ?></h4>
         </div>
 
         <!-- Socials & CV Download -->
         <div class="contact-info-block" style="margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--border-color);">
           <div style="display: flex; gap: 1.5rem; margin-bottom: 2rem;">
-            <a href="https://www.facebook.com/share/1Qhjua7uVT/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); transition: color 0.3s ease;" title="Facebook">
+            <a href="<?= e(portfolio_setting('social_facebook', 'https://www.facebook.com/share/1Qhjua7uVT/?mibextid=wwXIfr')) ?>" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); transition: color 0.3s ease;" title="Facebook">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
             </a>
             <!-- Instagram -->
-            <a href="https://www.instagram.com/ahmedmalik.co?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); transition: color 0.3s ease;" title="Instagram">
+            <a href="<?= e(portfolio_setting('social_instagram', 'https://www.instagram.com/ahmedmalik.co?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')) ?>" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); transition: color 0.3s ease;" title="Instagram">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
             <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/in/ahmed-malik-9b818a2b4/" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); transition: color 0.3s ease;" title="LinkedIn">
+            <a href="<?= e(portfolio_setting('social_linkedin', 'https://www.linkedin.com/in/ahmed-malik-9b818a2b4/')) ?>" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); transition: color 0.3s ease;" title="LinkedIn">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
             </a>
           </div>

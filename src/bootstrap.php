@@ -128,6 +128,26 @@ function app_log(string $event, array $context = []): void
     ));
 }
 
+function portfolio_setting(string $key, ?string $default = null): ?string
+{
+    static $settings = null;
+    if ($settings === null) {
+        $settings = [];
+        try {
+            $pdo = db();
+            $stmt = $pdo->query("SELECT setting_key, setting_value FROM portfolio_settings");
+            if ($stmt) {
+                foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+                    $settings[$row['setting_key']] = $row['setting_value'];
+                }
+            }
+        } catch (Throwable $e) {
+            // Settings table not ready or error, fallback to empty array
+        }
+    }
+    return array_key_exists($key, $settings) ? $settings[$key] : $default;
+}
+
 date_default_timezone_set((string) app_config('timezone', 'Asia/Karachi'));
 
 require_once __DIR__ . '/security.php';

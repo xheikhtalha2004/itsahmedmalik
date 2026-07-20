@@ -20,7 +20,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     exit;
 }
 
-$allowedSections = array_merge(['dashboard', 'contacts', 'meetings', 'newsletter'], array_keys(admin_modules()));
+$allowedSections = array_merge(['dashboard', 'contacts', 'meetings', 'newsletter', 'settings'], array_keys(admin_modules()));
 $section = (string) ($_GET['section'] ?? 'dashboard');
 if (!in_array($section, $allowedSections, true)) {
     $section = 'dashboard';
@@ -96,6 +96,8 @@ function admin_pkt_display(?string $utc): string
             <a class="<?= $section === 'contacts' ? 'active' : '' ?>" href="/admin/?section=contacts">Contacts</a>
             <a class="<?= $section === 'meetings' ? 'active' : '' ?>" href="/admin/?section=meetings">Meetings</a>
             <a class="<?= $section === 'newsletter' ? 'active' : '' ?>" href="/admin/?section=newsletter">Newsletter</a>
+            <p class="nav-label">System</p>
+            <a class="<?= $section === 'settings' ? 'active' : '' ?>" href="/admin/?section=settings">Settings</a>
         </nav>
         <a class="view-site" href="/" target="_blank" rel="noopener">View website ↗</a>
     </aside>
@@ -210,6 +212,10 @@ function admin_pkt_display(?string $utc): string
                                         <button class="button <?= $action === 'publish' ? 'primary' : '' ?>" type="submit"><?= e($label) ?></button>
                                     </form>
                                 <?php endforeach; ?>
+                                <form action="/admin/" method="post" onsubmit="return confirm('Are you sure you want to permanently delete this <?= e(strtolower($module['singular'])) ?>? This action is irreversible and cannot be undone.');" data-disable-on-submit>
+                                    <?php admin_hidden('delete_record', $section, $id, (int) $record['version']); ?>
+                                    <button class="button danger-button" type="submit">Delete</button>
+                                </form>
                             </div>
                         </section>
                     <?php endif; ?>
@@ -357,7 +363,33 @@ function admin_pkt_display(?string $utc): string
                         <dl><div><dt>Phone</dt><dd><?= e($row['phone'] ?: '—') ?></dd></div><div><dt>Service</dt><dd><?= e($row['service_code']) ?></dd></div><div><dt>Received</dt><dd><?= e($row['created_at']) ?> UTC</dd></div></dl>
                         <p class="message-body"><?= nl2br(e($row['message'])) ?></p>
                         <?php if ($row['admin_notification_error']): ?><p class="error-note">Admin email failed: <?= e($row['admin_notification_error']) ?></p><?php endif; ?>
-                        <?php if ($row['status'] === 'new'): ?><form method="post" action="/admin/"><?php admin_hidden('contact_handled', 'contacts', (int) $row['id']); ?><button class="button primary" type="submit">Mark handled</button></form><?php endif; ?>
+                        <div style="margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                            <?php if ($row['status'] === 'new'): ?>
+                                <form method="post" action="/admin/" style="margin: 0;">
+                                    <?php admin_hidden('contact_handled', 'contacts', (int) $row['id']); ?>
+                                    <button class="button primary small" type="submit">Mark handled</button>
+                                </form>
+                            <?php endif; ?>
+                            <details class="reply-details" style="width: 100%;">
+                                <summary class="button small">Reply to <?= e($row['full_name']) ?></summary>
+                                <form method="post" action="/admin/" style="margin-top: 0.75rem;" data-disable-on-submit>
+                                    <?php admin_hidden('contact_reply', 'contacts', (int) $row['id']); ?>
+                                    <div class="field-grid" style="grid-template-columns: 1fr;">
+                                        <label class="field">
+                                            <span>Subject *</span>
+                                            <input type="text" name="reply_subject" value="Re: Portfolio Inquiry" required>
+                                        </label>
+                                        <label class="field">
+                                            <span>Message *</span>
+                                            <textarea name="reply_message" rows="4" placeholder="Hi <?= e($row['full_name']) ?>..." required></textarea>
+                                        </label>
+                                    </div>
+                                    <div style="margin-top: 0.75rem;">
+                                        <button class="button primary small" type="submit">Send email reply</button>
+                                    </div>
+                                </form>
+                            </details>
+                        </div>
                     </article><?php endforeach; ?>
                 </section>
                 <?php if ($hasMore && $rows): ?><a class="button" href="/admin/?section=contacts&before=<?= (int) end($rows)['id'] ?>">Older messages</a><?php endif; ?>
@@ -373,7 +405,7 @@ function admin_pkt_display(?string $utc): string
                             <dl><div><dt>Requested</dt><dd><?= e(admin_pkt_display($row['requested_start_at'])) ?></dd></div><div><dt>Approved</dt><dd><?= e(admin_pkt_display($row['approved_start_at'])) ?></dd></div><div><dt>Received</dt><dd><?= e($row['created_at']) ?> UTC</dd></div></dl>
                             <?php if ($row['request_notification_error']): ?><p class="error-note">Request alert failed: <?= e($row['request_notification_error']) ?></p><?php endif; ?>
                             <?php if ($row['approval_notification_error']): ?><p class="error-note">Approval email failed: <?= e($row['approval_notification_error']) ?></p><?php endif; ?>
-                            <?php if ($row['status'] === 'pending'): ?><form class="meeting-actions" method="post" action="/admin/" data-disable-on-submit>
+                            <?php if ($row['status'] === 'pending'): ?><form class="meeting-actions" method="post" action="/admin/" onsubmit="return handleMeetingApproval(this);" data-disable-on-submit>
                                 <?php admin_hidden('meeting_approve', 'meetings', (int) $row['id']); ?>
                                 <label class="field"><span>Final date *</span><input type="date" name="final_date" value="<?= e($defaultDate) ?>" required></label>
                                 <label class="field"><span>Final time (PKT) *</span><input type="time" name="final_time" value="<?= e($defaultTime) ?>" step="1800" required></label>
@@ -386,14 +418,76 @@ function admin_pkt_display(?string $utc): string
                 </section>
                 <?php if ($hasMore && $rows): ?><a class="button" href="/admin/?section=meetings&before=<?= (int) end($rows)['id'] ?>">Older requests</a><?php endif; ?>
 
-            <?php else: ?>
+            <?php elseif ($section === 'newsletter'): ?>
                 <?php $rows = admin_list_subscribers($before); $hasMore = count($rows) > 25; $rows = array_slice($rows, 0, 25); ?>
                 <header class="page-header"><div><p class="eyebrow">Inbox</p><h1>Newsletter</h1><p>Subscribers are stored once; repeat submissions update their last-seen time.</p></div><form method="post" action="/admin/"><?php admin_hidden('newsletter_export', 'newsletter'); ?><button class="button primary" type="submit">Export CSV</button></form></header>
+                
+                <section class="panel" style="margin-bottom: 2rem;">
+                    <div class="panel-heading">
+                        <div>
+                            <h2>Compose &amp; send newsletter</h2>
+                            <p>This will send a generic email notification to all active subscribers.</p>
+                        </div>
+                    </div>
+                    <form action="/admin/" method="post" onsubmit="return confirm('Are you sure you want to send this newsletter to all active subscribers?');" data-disable-on-submit>
+                        <?php admin_hidden('send_bulk_newsletter', 'newsletter'); ?>
+                        <div class="field-grid">
+                            <label class="field wide">
+                                <span>Email Subject *</span>
+                                <input type="text" name="newsletter_subject" placeholder="Ahmed Malik's Latest Update" required>
+                            </label>
+                            <label class="field wide">
+                                <span>Message Content *</span>
+                                <textarea name="newsletter_message" rows="5" placeholder="Write your non-robotic message here..." required></textarea>
+                            </label>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <button class="button primary" type="submit">Send to all subscribers</button>
+                        </div>
+                    </form>
+                </section>
+
                 <section class="panel table-wrap"><table><thead><tr><th>Email</th><th>Source</th><th>Status</th><th>First subscribed</th><th>Last submitted</th></tr></thead><tbody>
                     <?php foreach ($rows as $row): ?><tr><td><?= e($row['email']) ?></td><td><?= e($row['source_path']) ?></td><td><span class="status <?= e($row['status']) ?>"><?= e($row['status']) ?></span></td><td><?= e($row['first_subscribed_at']) ?> UTC</td><td><?= e($row['last_submitted_at']) ?> UTC</td></tr><?php endforeach; ?>
                     <?php if (!$rows): ?><tr><td colspan="5" class="empty">No subscribers found.</td></tr><?php endif; ?>
                 </tbody></table></section>
                 <?php if ($hasMore && $rows): ?><a class="button" href="/admin/?section=newsletter&before=<?= (int) end($rows)['id'] ?>">Older subscribers</a><?php endif; ?>
+
+            <?php elseif ($section === 'settings'): ?>
+                <header class="page-header">
+                    <div><p class="eyebrow">System</p><h1>Settings</h1><p>Edit contact information, links, and details displayed on the website.</p></div>
+                </header>
+                <form class="panel editor-form" action="/admin/" method="post" data-disable-on-submit>
+                    <?php admin_hidden('save_settings', 'settings'); ?>
+                    <div class="field-grid">
+                        <label class="field wide">
+                            <span>Contact Page Emails (one per line) *</span>
+                            <textarea name="contact_emails" rows="3" required><?= e(portfolio_setting('contact_emails', 'hello@itsahmedmalik.com')) ?></textarea>
+                            <small>You can enter multiple email addresses here.</small>
+                        </label>
+                        <label class="field">
+                            <span>Contact Phone *</span>
+                            <input type="text" name="contact_phone" value="<?= e(portfolio_setting('contact_phone', '+92 315 5320243')) ?>" required>
+                        </label>
+                        <label class="field">
+                            <span>Contact Location *</span>
+                            <input type="text" name="contact_location" value="<?= e(portfolio_setting('contact_location', 'Islamabad, Pakistan')) ?>" required>
+                        </label>
+                        <label class="field wide">
+                            <span>Instagram Link *</span>
+                            <input type="url" name="social_instagram" value="<?= e(portfolio_setting('social_instagram', 'https://www.instagram.com/ahmedmalik.co?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')) ?>" required>
+                        </label>
+                        <label class="field wide">
+                            <span>LinkedIn Link *</span>
+                            <input type="url" name="social_linkedin" value="<?= e(portfolio_setting('social_linkedin', 'https://www.linkedin.com/in/ahmed-malik-9b818a2b4/')) ?>" required>
+                        </label>
+                        <label class="field wide">
+                            <span>Facebook Link *</span>
+                            <input type="url" name="social_facebook" value="<?= e(portfolio_setting('social_facebook', 'https://www.facebook.com/share/1Qhjua7uVT/?mibextid=wwXIfr')) ?>" required>
+                        </label>
+                    </div>
+                    <div class="form-actions"><button class="button primary" type="submit">Save dynamic settings</button></div>
+                </form>
             <?php endif; ?>
         <?php } catch (Throwable $exception) { ?>
             <?php error_log('Admin page failed: ' . $exception->getMessage()); ?>
@@ -401,5 +495,28 @@ function admin_pkt_display(?string $utc): string
         <?php } ?>
     </main>
 </div>
+<script>
+function handleMeetingApproval(form) {
+    const submitter = document.activeElement;
+    if (submitter && submitter.getAttribute('name') === 'action' && submitter.getAttribute('value') === 'meeting_reject') {
+        return confirm('Reject this meeting request?');
+    }
+    
+    const message = prompt('Enter a custom confirmation email message to send to the visitor (or click OK/leave empty to send the default automated email):', '');
+    if (message === null) {
+        return false;
+    }
+    
+    let input = form.querySelector('input[name="custom_message"]');
+    if (!input) {
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'custom_message';
+        form.appendChild(input);
+    }
+    input.value = message;
+    return true;
+}
+</script>
 </body>
 </html>

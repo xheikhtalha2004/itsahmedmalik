@@ -70,9 +70,9 @@
         { "@type": "CollegeOrUniversity", "name": "International Islamic University Islamabad" }
       ],
       "sameAs": [
-        "https://www.instagram.com/ahmedmalik.co?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-        "https://www.linkedin.com/in/ahmed-malik-9b818a2b4/",
-        "https://www.facebook.com/share/1Qhjua7uVT/?mibextid=wwXIfr"
+        "<?= e(portfolio_setting('social_instagram', 'https://www.instagram.com/ahmedmalik.co?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')) ?>",
+        "<?= e(portfolio_setting('social_linkedin', 'https://www.linkedin.com/in/ahmed-malik-9b818a2b4/')) ?>",
+        "<?= e(portfolio_setting('social_facebook', 'https://www.facebook.com/share/1Qhjua7uVT/?mibextid=wwXIfr')) ?>"
       ]
     },
     {
@@ -146,13 +146,13 @@
           <strong>Founder and CEO at TAMx | Co Founder at E Deviser<br>Co Founder at QuickSilver</strong>
         </p>
         <div class="hero-social" aria-label="Ahmed Malik social links">
-          <a href="https://www.instagram.com/ahmedmalik.co?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="hero-social-link" title="Instagram" aria-label="Instagram">
+          <a href="<?= e(portfolio_setting('social_instagram', 'https://www.instagram.com/ahmedmalik.co?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')) ?>" target="_blank" rel="noopener noreferrer" class="hero-social-link" title="Instagram" aria-label="Instagram">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
           </a>
-          <a href="https://www.linkedin.com/in/ahmed-malik-9b818a2b4/" target="_blank" rel="noopener noreferrer" class="hero-social-link" title="LinkedIn" aria-label="LinkedIn">
+          <a href="<?= e(portfolio_setting('social_linkedin', 'https://www.linkedin.com/in/ahmed-malik-9b818a2b4/')) ?>" target="_blank" rel="noopener noreferrer" class="hero-social-link" title="LinkedIn" aria-label="LinkedIn">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
           </a>
-          <a href="https://www.facebook.com/share/1Qhjua7uVT/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="hero-social-link" title="Facebook" aria-label="Facebook">
+          <a href="<?= e(portfolio_setting('social_facebook', 'https://www.facebook.com/share/1Qhjua7uVT/?mibextid=wwXIfr')) ?>" target="_blank" rel="noopener noreferrer" class="hero-social-link" title="Facebook" aria-label="Facebook">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
           </a>
         </div>

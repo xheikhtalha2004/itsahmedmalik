@@ -71,21 +71,28 @@ function mail_admin_meeting(array $meeting): array
 }
 
 /** @return array{ok:bool,error:?string} */
-function mail_meeting_approval(array $meeting): array
+function mail_meeting_approval(array $meeting, ?string $customMessage = null): array
 {
     $approved = format_meeting_time((string) ($meeting['approved_start_at'] ?? ''));
     $name = trim((string) ($meeting['full_name'] ?? ''));
-    $html = mail_html_layout(
-        'Your meeting is confirmed',
-        '<p>Hello ' . e($name) . ',</p>'
-        . '<p>Your meeting with Ahmed Malik is confirmed for <strong>' . e($approved) . '</strong>.</p>'
-        . '<p>If anything changes, reply to this email or call using the details you provided.</p>',
-    );
-    $plain = sprintf(
-        "Hello %s,\n\nYour meeting with Ahmed Malik is confirmed for %s.\n\nIf anything changes, reply to this email.",
-        $name,
-        $approved,
-    );
+
+    if ($customMessage !== null && trim($customMessage) !== '') {
+        $msg = trim($customMessage);
+        $htmlContent = nl2br(e($msg), false);
+        $plain = $msg;
+    } else {
+        $htmlContent = '<p>Hi ' . e($name) . ',</p>'
+            . '<p>I hope you\'re doing well. I\'m writing to let you know that our meeting is confirmed for <strong>' . e($approved) . '</strong>.</p>'
+            . '<p>Looking forward to speaking with you! If you need to reschedule or have any questions, feel free to reply to this email directly.</p>'
+            . '<p>Best regards,<br>Ahmed Malik</p>';
+        $plain = sprintf(
+            "Hi %s,\n\nI hope you're doing well. I'm writing to let you know that our meeting is confirmed for %s.\n\nLooking forward to speaking with you! If you need to reschedule or have any questions, feel free to reply to this email directly.\n\nBest regards,\nAhmed Malik",
+            $name,
+            $approved,
+        );
+    }
+
+    $html = mail_html_layout('Meeting Confirmed', $htmlContent);
 
     return smtp_send(
         (string) ($meeting['email'] ?? ''),

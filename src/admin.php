@@ -1123,7 +1123,7 @@ function admin_meeting_utc(string $date, string $time): string
     return $local->setTimezone(new DateTimeZone('UTC'))->format('Y-m-d H:i:s');
 }
 
-function admin_approve_meeting(int $id, string $date, string $time, string $note): void
+function admin_approve_meeting(int $id, string $date, string $time, string $note, ?string $customMessage = null): void
 {
     $approvedUtc = admin_meeting_utc($date, $time);
     if (admin_length($note) > 500) {
@@ -1159,7 +1159,7 @@ function admin_approve_meeting(int $id, string $date, string $time, string $note
         throw $exception;
     }
 
-    admin_send_approval($id);
+    admin_send_approval($id, $customMessage);
 }
 
 function admin_reject_meeting(int $id, string $note): void
@@ -1177,7 +1177,7 @@ function admin_reject_meeting(int $id, string $note): void
     }
 }
 
-function admin_send_approval(int $id): void
+function admin_send_approval(int $id, ?string $customMessage = null): void
 {
     $statement = db()->prepare('SELECT * FROM meeting_requests WHERE id = :id');
     $statement->execute(['id' => $id]);
@@ -1188,7 +1188,7 @@ function admin_send_approval(int $id): void
     if (!function_exists('mail_meeting_approval')) {
         throw new RuntimeException('The mailer is not available. The meeting remains approved.');
     }
-    $result = mail_meeting_approval($meeting);
+    $result = mail_meeting_approval($meeting, $customMessage);
     $ok = (bool) ($result['ok'] ?? false);
     $error = $ok ? null : substr((string) ($result['error'] ?? 'Delivery failed.'), 0, 1_000);
     $update = db()->prepare(
@@ -1198,6 +1198,99 @@ function admin_send_approval(int $id): void
     if (!$ok) {
         throw new RuntimeException('The meeting was approved, but the visitor email failed. Use Retry email after checking SMTP.');
     }
+}
+
+function admin_delete_record(string $section, int $id, int $version): void
+{
+    $module = admin_module($section);
+    $table = $module['table'];
+    
+    $pdo = db();
+    $stmt = $pdo->prepare("DELETE FROM `{$table}` WHERE id = :id AND version = :version");
+    $stmt->execute(['id' => $id, 'version' => $version]);
+    if ($stmt->rowCount() === 0) {
+        throw new RuntimeException('The record could not be permanently deleted. It may have been modified by another session.');
+    }
+}
+
+function admin_save_settings(array $post): void
+{
+    $keys = [
+        'contact_emails',
+        'contact_phone',
+        'contact_location',
+        'social_instagram',
+        'social_linkedin',
+        'social_facebook',
+    ];
+    $pdo = db();
+    $stmt = $pdo->prepare("INSERT INTO portfolio_settings (setting_key, setting_value) VALUES (:key, :value) ON DUPLICATE KEY UPDATE setting_value = :value");
+    foreach ($keys as $key) {
+        $value = trim((string) ($post[$key] ?? ''));
+        $stmt->execute(['key' => $key, 'value' => $value]);
+    }
+}
+
+function admin_reply_contact(int $contactId, string $subject, string $message): void
+{
+    if (trim($subject) === '' || trim($message) === '') {
+        throw new InvalidArgumentException('Subject and message cannot be empty.');
+    }
+    
+    $pdo = db();
+    $stmt = $pdo->prepare("SELECT * FROM contact_submissions WHERE id = :id");
+    $stmt->execute(['id' => $contactId]);
+    $contact = $stmt->fetch();
+    if (!is_array($contact)) {
+        throw new InvalidArgumentException('Contact submission not found.');
+    }
+    
+    $recipient = $contact['email'];
+    $plain = trim($message);
+    $html = mail_html_layout($subject, nl2br(e(trim($message)), false));
+    
+    $result = smtp_send($recipient, $subject, $html, $plain);
+    if (!$result['ok']) {
+        throw new RuntimeException('Failed to send reply email: ' . ($result['error'] ?? 'Unknown SMTP error'));
+    }
+    
+    $update = $pdo->prepare("UPDATE contact_submissions SET status = 'handled', updated_at = UTC_TIMESTAMP() WHERE id = :id");
+    $update->execute(['id' => $contactId]);
+}
+
+function admin_send_bulk_newsletter(string $subject, string $message): array
+{
+    if (trim($subject) === '' || trim($message) === '') {
+        throw new InvalidArgumentException('Subject and message cannot be empty.');
+    }
+    
+    $pdo = db();
+    $stmt = $pdo->prepare("SELECT email FROM newsletter_subscribers WHERE status = 'active'");
+    $stmt->execute();
+    $subscribers = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    
+    if (empty($subscribers)) {
+        return ['sent' => 0, 'failed' => 0];
+    }
+    
+    @set_time_limit(300);
+    
+    $sentCount = 0;
+    $failedCount = 0;
+    
+    $plain = trim($message);
+    $html = mail_html_layout($subject, nl2br(e(trim($message)), false));
+    
+    foreach ($subscribers as $email) {
+        $result = smtp_send($email, $subject, $html, $plain);
+        if ($result['ok']) {
+            $sentCount++;
+        } else {
+            $failedCount++;
+        }
+    }
+    
+    return ['sent' => $sentCount, 'failed' => $failedCount];
 }
 
 function admin_export_newsletter(): never
@@ -1390,6 +1483,39 @@ function admin_handle_post(): ?string
                 admin_flash('success', 'Project member order updated.');
                 return '/admin/?section=projects&view=edit&id=' . $id;
 
+            case 'delete_record':
+                admin_delete_record(
+                    $section,
+                    $id,
+                    filter_var($_POST['version'] ?? null, FILTER_VALIDATE_INT) ?: 0
+                );
+                admin_flash('success', 'Permanently deleted successfully.');
+                return '/admin/?section=' . rawurlencode($section);
+
+            case 'save_settings':
+                admin_save_settings($_POST);
+                admin_flash('success', 'Portfolio settings saved successfully.');
+                return '/admin/?section=settings';
+
+            case 'contact_reply':
+                admin_reply_contact(
+                    $id,
+                    (string) ($_POST['reply_subject'] ?? ''),
+                    (string) ($_POST['reply_message'] ?? '')
+                );
+                admin_flash('success', 'Reply email sent and contact marked handled.');
+                $section = 'contacts';
+                break;
+
+            case 'send_bulk_newsletter':
+                $result = admin_send_bulk_newsletter(
+                    (string) ($_POST['newsletter_subject'] ?? ''),
+                    (string) ($_POST['newsletter_message'] ?? '')
+                );
+                admin_flash('success', 'Newsletter email sent successfully to ' . $result['sent'] . ' subscribers. (' . $result['failed'] . ' failed)');
+                $section = 'newsletter';
+                break;
+
             case 'contact_handled':
                 admin_mark_contact_handled($id);
                 admin_flash('success', 'Contact marked handled.');
@@ -1401,7 +1527,8 @@ function admin_handle_post(): ?string
                     $id,
                     (string) ($_POST['final_date'] ?? ''),
                     (string) ($_POST['final_time'] ?? ''),
-                    trim((string) ($_POST['admin_note'] ?? ''))
+                    trim((string) ($_POST['admin_note'] ?? '')),
+                    (string) ($_POST['custom_message'] ?? null)
                 );
                 admin_flash('success', 'Meeting approved and visitor notified.');
                 $section = 'meetings';
