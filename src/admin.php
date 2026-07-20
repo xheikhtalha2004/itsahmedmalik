@@ -1224,10 +1224,10 @@ function admin_save_settings(array $post): void
         'social_facebook',
     ];
     $pdo = db();
-    $stmt = $pdo->prepare("INSERT INTO portfolio_settings (setting_key, setting_value) VALUES (:key, :value) ON DUPLICATE KEY UPDATE setting_value = :value");
+    $stmt = $pdo->prepare("INSERT INTO portfolio_settings (setting_key, setting_value) VALUES (:key, :value) ON DUPLICATE KEY UPDATE setting_value = :value_update");
     foreach ($keys as $key) {
         $value = trim((string) ($post[$key] ?? ''));
-        $stmt->execute(['key' => $key, 'value' => $value]);
+        $stmt->execute(['key' => $key, 'value' => $value, 'value_update' => $value]);
     }
 }
 

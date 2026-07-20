@@ -179,6 +179,7 @@ function smtp_send(
         app_log('mail_delivery_failed', [
             'reason' => 'smtp_error',
             'exception' => $exception::class,
+            'message' => $exception->getMessage(),
         ]);
         return ['ok' => false, 'error' => 'delivery_failed'];
     }
