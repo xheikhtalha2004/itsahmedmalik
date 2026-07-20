@@ -7,10 +7,9 @@
           <label class="sr-only" for="newsletter-email-<?= e($footerId) ?>">Email address</label>
           <input type="email" id="newsletter-email-<?= e($footerId) ?>" name="email" placeholder="Enter your email" class="newsletter-input" autocomplete="email" maxlength="254" required />
           <input type="hidden" name="source_path" value="<?= e($sourcePath) ?>" />
-          <div class="honeypot-field" aria-hidden="true">
+          <div class="honeypot-field" aria-hidden="true" style="display: none !important;">
             <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
           </div>
-          <div class="turnstile-widget" data-action="newsletter" data-turnstile-action="newsletter"></div>
           <button type="submit" class="newsletter-btn">Let me know</button>
           <p class="form-status" data-form-status aria-live="polite"></p>
         </form>

@@ -49,9 +49,16 @@ function public_render_page(string $template, string $page, ?array $content, ?st
         ])
     );
 
+    // Clear browser cache for CSS and forms.js on all public pages
+    $html = (string) preg_replace(
+        '/href=["\']style\.css(?:\?v=[^"\']*)?["\']/',
+        'href="style.css?v=1.1.5"',
+        $html
+    );
+
     $html = str_replace(
         '</body>',
-        "  <script src=\"forms.js?v=1.1.2\"></script>\n</body>",
+        "  <script src=\"forms.js?v=1.1.5\"></script>\n</body>",
         $html
     );
 
